@@ -1,13 +1,14 @@
 # state
 
 
-## - state 规则
+# 1. state 
+#### 规则
 1. state只能在组件的·constructor·中初始化
 2. state只能使用`setState`方法来更新数据
 3. `setState`会导致`render`重新执行，渲染组件和**子组件**，子组件更新不会更新父组件（需要探索效率问题）
 
 
-## - props 父->子组件间参数传递 
+# 2. props 父->子组件间参数传递 
 props 无需定义，可直接使用
 
 ### 1. 组件 单标签传递参数
@@ -59,7 +60,90 @@ class Page extend Component{
     <span>this is a span</span>
     <Tag>this is a Tag Component</Tag>
     ```
-  - 不想原封不动回去子组件的html时，可以使用`this.props.children.tagname`来回去具体某个属性的值
+  - 在Box子组件中，不想原封不动回去子组件的html时，可以使用`this.props.children.tagname`来回去具体某个属性的值
+  - 在Tag子组件中，直接使用`this.props.tagname`即可回去该参数的值
+  
 - 但是子标签中的自定义组件标签可以继续传递参数，而原生html标签则不可以之间传递参数
   - `<span mytitle='myspan'>this is a span</span>`会报错
+
+
+### 3. 示例
+
+- App
+  - Frame
+    - Like
+    - Input
+
+```javascript
+// App
+import React from 'react'
+import Like from './Like'
+import Input from './Input'
+import Frame from './Frame'
+
+function App() {
+    return (
+        <div className='flex items-center justify-center h-screen bg-gray-100'>
+            <Frame name="frame">
+                <Like name="like"></Like>
+                <Input name="input"></Input>
+                <div>Frame Component in the App</div>
+            </Frame>
+        </div>
+    )
+}
+export default App
+```
+
+```javascript
+// Frame
+import React,{ Component } from "react";
+
+class Frame extends Component{
+    render(){
+        console.log('frame: ', this.props);
+        
+        return (
+            <div className="frame w-64 h-56 bg-teal-300 flex flex-col justify-center items-center">
+                {this.props.children}
+            </div>
+        )
+    }
+}
+export default Frame
+```
+
+```javascript
+// Like
+
+render(){
+        console.log('like: ',this.props);
+        
+        return (
+            <div className="flex m-4">
+              ...
+            </div>
+        )
+    }
+```
+
+
+```javascript
+// Input
+
+ render(){
+        console.log('input: ',this.props);
+
+        return (
+            <div>
+              ...
+            </div>
+        )
+    }
+```
+
+
+
+
+
 
