@@ -32,6 +32,12 @@ class Demo extends Component{
 ```
 
 - **箭头函数在哪个对象中使用，箭头函数中的this就指向哪个对象，此处就是Demo类**
+- 如果此处不使用箭头函数，那么`onClick={function(){this.handleClick()}}`里面的this会指向`<div>`标签
+- 因为在jsx语法中，html的`<div>`标签会被转换为`React.createElement`元素，因此会丢失this作用域
+
+
+
+
 
 ### 2.2 示例
 创建一个对象obj，包含一个属性name和一个方法f。在函数方法中使用setTimeout()函数，在100ms后显示该obj的name属性的值
