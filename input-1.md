@@ -1,4 +1,4 @@
-# React获取原生对象
+# React获取原生对象，受控组件
 
 - input控件不直接显示输入内容，而是以react的方式，控件触发onChange事件后，有onChangeHandler函数去改变this.state的状态。状态发生变化后react会自动触发render函数去重新渲染页面
 
@@ -9,3 +9,42 @@
   - 当时需要实时显示键盘输入，就将state设置为从input控件中获取的value值，再通过input的value属性将该值显示在输入框中
   - 如果需要特殊处理，那么把`this.state.text`设置为什么值，那么输入框就显示什么值
   - 也可以先获取到输入框的输入内容，判断长度是否大于10个字符，超过则禁止输入，通过state来控制。而实际上`e.target.value`依然能获取到输入的值，只不过不更新state，也就不能中心选人页面，也就不能继续显示超过10个的字符
+
+```javascript
+import React, { Component } from "react";
+
+class Input extends Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            text:''
+        }
+    }
+
+    handleChange(e){
+        console.log(e.target.value);
+        if(e.target.value.length > 10){
+            return
+        }else{
+            this.setState({
+                text: e.target.value
+            })
+        }
+
+    }
+
+    render(){
+        return (
+            <div>
+                <input 
+                value={this.state.text}
+                onChange={(e)=>this.handleChange(e)} 
+                type="text" className="shadow-lg outline-none"/>
+            </div>
+        )
+    }
+}
+
+export default Input
+
+```
