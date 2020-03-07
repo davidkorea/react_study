@@ -158,5 +158,6 @@ render(){
 
 **当前组件作用域下，修改其他组件的state**
 
+![08F6E6BF-4086-4B32-B5E2-C2EAE7885C57](https://user-images.githubusercontent.com/26485327/76143370-dce9a900-60b1-11ea-9454-e67f901aa613.jpeg)
 
 
