@@ -62,7 +62,9 @@ class Page extend Component{
     <span>this is a span</span>
     <Tag>this is a Tag Component</Tag>
     ```
-  - 在Box子组件中，不想原封不动回去子组件的html时，可以使用`this.props.children.tagname`来回去具体某个属性的值
+  - 在Box子组件中，不想原封不动回去子组件的html时，可以使用`this.props.children[1].props.tagname`来获取子元素的具体某个属性的值
+    - 级联使用props。因为children拿到的是一个数组，里面每个元素都是插入到父元素里面的子元素，第一个元素为span，第二个元素为Tag
+    - 要拿到第二个子元素的属性值，需要2使用props
   - 在Tag子组件中，直接使用`this.props.tagname`即可回去该参数的值
   
 - 但是子标签中的自定义组件标签可以继续传递参数，而原生html标签则不可以之间传递参数
@@ -77,6 +79,7 @@ class Page extend Component{
     - Input
 
 > **把一个自定义组件拆开，在放入其他子组件。即把`<Frame />`组件拆开`<Frame>  </Frame>`，并在其中放入其他子组件**
+> **FATHER.props.children[0].props.ATTRI**，子元素的属性值获取方法
 
 <img width="1100" src="https://user-images.githubusercontent.com/26485327/76142009-59758b00-60a4-11ea-8a5b-bd6f47577cbd.png">
 
@@ -108,8 +111,9 @@ import React,{ Component } from "react";
 
 class Frame extends Component{
     render(){
-        console.log('frame: ', this.props);
-        
+        console.log('frame: ', this.props);               // children=[{Like},{Input},{div}]
+        console.log(this.props.children[0].props.name);   // children的第一个元素的props的name属性
+
         return (
             <div className="frame w-64 h-56 bg-teal-300 flex flex-col justify-center items-center">
                 {this.props.children}
@@ -122,7 +126,6 @@ export default Frame
 
 ```javascript
 // Like
-
 render(){
         console.log('like: ',this.props);
         
