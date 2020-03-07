@@ -1,7 +1,7 @@
 # state & props
 1. state
 2. props
-3. 状态提升
+3. 状态提升 + 方法下放
 
 # 1. state 
 #### 规则
@@ -154,10 +154,113 @@ render(){
     }
 ```
 
-# 3. 状态提升
+# 3. 状态提升 + 方法下放
 
 **当前组件作用域下，修改其他组件的state**
 
 ![08F6E6BF-4086-4B32-B5E2-C2EAE7885C57](https://user-images.githubusercontent.com/26485327/76143370-dce9a900-60b1-11ea-9454-e67f901aa613.jpeg)
+```javascript
+// App
+import Frame from './Frame'
+
+function App() {
+    return (
+        <div className='flex items-center justify-center h-screen bg-gray-100'>
+            <Frame />
+        </div>
+    )
+}
+```
+
+```javascript
+// Frame
+import React,{ Component } from "react";
+import Title from './Title'
+import Button from './Button'
+
+class Frame extends Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            themeColor: ''
+        }
+    }
+
+    handleClick(color){
+        this.setState({
+            themeColor:color
+        })
+    }
+    render(){
+        return (
+            <div className="frame w-64 h-56 bg-teal-300 flex flex-col justify-center items-center">
+                <Title themeColor={this.state.themeColor}></Title>
+                <Button handleClick={(color)=>this.handleClick(color)}></Button>
+            </div>
+        )
+    }
+}
+export default Frame
+```
+
+```javascript
+// Button
+import React, { Component } from "react";
+
+class Button extends Component{
+    constructor(props){
+        super(props)
+    }
+    
+    render(){
+        return (
+            <div>
+                <button 
+                  onClick={()=>this.props.handleClick('red')}
+                  className="w-12 m-1 shadow-lg border-2 bg-gray-400"
+                >Red</button>
+                
+                <button 
+                  onClick={()=>this.props.handleClick('blue')}
+                  className="w-12 m-1 shadow-lg border-2 bg-gray-400"
+                >Blue</button>
+            </div>
+        )
+    }
+}
+export default Button
+```
+
+```javascript
+// Title
+import React, { Component } from "react";
+
+class Title extends Component{
+    render(){
+        return (
+            <div 
+              style={{color:this.props.themeColor}}
+              className="m-6 text-3xl font-bold"
+            >Title</div>
+        )
+    }
+}
+export default Title
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
