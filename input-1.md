@@ -10,6 +10,9 @@
   - 如果需要特殊处理，那么把`this.state.text`设置为什么值，那么输入框就显示什么值
   - 也可以先获取到输入框的输入内容，判断长度是否大于10个字符，超过则禁止输入，通过state来控制。而实际上`e.target.value`依然能获取到输入的值，只不过不更新state，也就不能中心选人页面，也就不能继续显示超过10个的字符
 
+![Mar-07-2020 17-13-09](https://user-images.githubusercontent.com/26485327/76140579-f4ffff00-6096-11ea-9abf-3d8d210e7e76.gif)
+
+
 ```javascript
 import React, { Component } from "react";
 
@@ -30,7 +33,6 @@ class Input extends Component{
                 text: e.target.value
             })
         }
-
     }
 
     render(){
