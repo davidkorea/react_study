@@ -1,0 +1,3 @@
+# React获取原生对象
+
+- input控件不直接显示输入内容，而是以react的方式，控件触发onChange事件后，有onChangeHandler函数去改变this.state的状态。状态发生变化后react会自动触发render函数去重新渲染页面
