@@ -3,9 +3,40 @@
 
 ## 2. 作用域
 
+### 2.1 react组件中的箭头函数
+
+```javascript
+
+class Demo extends Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      text: ''
+    }
+  }
+  
+  handleClick(){
+    this.setState({
+      text: 'hi'
+    })
+  }
+  
+  render(){
+    return (
+        <button onClick={ ()=>this.handleClick() }> // 箭头函数中的this指向Demo
+          {this.state.text}
+        </button>  
+    )
+  }
+}
+```
+
+- **箭头函数在哪个对象中使用，箭头函数中的this就指向哪个对象，此处就是Demo类**
+
+### 2.2 示例
 创建一个对象obj，包含一个属性name和一个方法f。在函数方法中使用setTimeout()函数，在100ms后显示该obj的name属性的值
 
-1. ES5
+#### 1. ES5
 ```javascript
 obj = {
   name: 1,
@@ -29,7 +60,7 @@ obj.f2();   // 1
 - 可以在调用setTimeout函数之前，将obj对象的this赋值给另一个变量`me`，再在setTimeout函数中打印`me.name`才可以打印出obj对象的name属性的值
 
 
-2. ES6 箭头函数
+#### 2. ES6 箭头函数
 **this在哪个对象中被调用，this就代指哪个对象**
 
 ```javascript
