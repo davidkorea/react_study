@@ -157,8 +157,21 @@ render(){
 # 3. 状态提升 + 方法下放
 
 **当前组件作用域下，修改其他组件的state**
+- 子组件的状态state全部放在共同的父元素中
+- 父元素改变state的方法函数，通过属性props下放到子元素，子元素通过获取到的父元素的放哈函数，来改变父元素的状态
+- 父元素状态改变后，在获取新的状态通过props传递给子元素，来更新子元素
 
-![08F6E6BF-4086-4B32-B5E2-C2EAE7885C57](https://user-images.githubusercontent.com/26485327/76143370-dce9a900-60b1-11ea-9454-e67f901aa613.jpeg)
+<img width="600" src="https://user-images.githubusercontent.com/26485327/76143370-dce9a900-60b1-11ea-9454-e67f901aa613.jpeg" />
+
+## 示例
+
+- 同在Frame父元素中的Title和Button元素
+- 按钮Button通过父元素传递下来的方法函数来改变父元素的state
+- 父元素状态改变后，再次通过props传递给Title子元素来变更样式
+
+![Mar-07-2020 20-53-57](https://user-images.githubusercontent.com/26485327/76143863-cba29b80-60b5-11ea-800d-9a3ae70e699d.gif)
+
+
 ```javascript
 // App
 import Frame from './Frame'
