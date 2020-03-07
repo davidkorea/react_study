@@ -1,6 +1,55 @@
 # ES6箭头函数
 
-## 示例
+
+## 2. 作用域
+
+创建一个对象obj，包含一个属性name和一个方法f。在函数方法中使用setTimeout()函数，在100ms后显示该obj的name属性的值
+
+1. ES5
+```javascript
+obj = {
+  name: 1,
+  f1: function(){
+    setTimeout(function(){
+      console.log(this.name)
+    }, 100)
+  },
+  f2: function(){
+    var me = this
+    setTimeout(function(){
+      console.log(me.name)
+    }, 100)
+  }
+};
+
+obj.f1();   // 空
+obj.f2();   // 1
+```
+- 由于setTimeout函数是window调用的`window.setTimeout()`，因此在这个setTimeout函数内部打印this.name是打印不出obj对象的name属性
+- 可以在调用setTimeout函数之前，将obj对象的this赋值给另一个变量`me`，再在setTimeout函数中打印`me.name`才可以打印出obj对象的name属性的值
+
+
+2. ES6 箭头函数
+**this在哪个对象中被调用，this就代指哪个对象**
+
+```javascript
+obj = {
+  name: 2
+  f: function(){
+    setTimeout(
+    ()=>{
+      console.log(this.name)
+    }, 100)
+  }
+};
+obj.f();    // 2
+```
+- 即使在`window.setTimeout`函数里面调用this，this依然指向当前被调用的对象obj
+
+
+
+
+## 1. 示例
 1. 多参数，单代码
 ```javascript
 var add = function(a, b){
