@@ -1,4 +1,4 @@
-# state
+# state & props
 
 
 # 1. state 
@@ -35,6 +35,8 @@ class Page extend Component{
 
 ### 2. 组件 双标签传递参数
 
+> **注意**：是将一个自定义的**组件标签拆开**，并放入其他组件标签来使用。而不是把普通html标签拆开放入自足见。因为html标签本来就可以拆开放子组件
+
 ```JavaScript
 import Box from './Box'
 import Tag from './Tag'
@@ -44,7 +46,7 @@ class Page extend Component{
   render(){
     return (
       <div>
-        <Box title="myBox">
+        <Box title="myBox">               // 自定义组件标签拆开，而不是html标签拆开
           <span>this is a span</span>
           <Tag tagname="tag">this is a Tag Component</Tag>
         </Box>
@@ -73,6 +75,11 @@ class Page extend Component{
   - Frame
     - Like
     - Input
+
+> **把一个自定义组件拆开，在放入其他子组件。即把`<Frame />`组件拆开`<Frame>  </Frame>`，并在其中放入其他子组件**
+
+<img width="1100" src="https://user-images.githubusercontent.com/26485327/76142009-59758b00-60a4-11ea-8a5b-bd6f47577cbd.png">
+
 
 ```javascript
 // App
