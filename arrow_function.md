@@ -37,9 +37,9 @@ obj = {
   name: 2
   f: function(){
     setTimeout(
-    ()=>{
-      console.log(this.name)
-    }, 100)
+      ()=>{
+        console.log(this.name)
+      }, 100)
   }
 };
 obj.f();    // 2
