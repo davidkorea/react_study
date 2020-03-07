@@ -32,8 +32,9 @@ class Demo extends Component{
 ```
 
 - **箭头函数在哪个对象中使用，箭头函数中的this就指向哪个对象，此处就是Demo类**
-- 如果此处不使用箭头函数，那么`onClick={function(){this.handleClick()}}`里面的this会指向`<div>`标签
-- 因为在jsx语法中，html的`<div>`标签会被转换为`React.createElement`元素，因此会丢失this作用域
+- 如果此处不使用箭头函数，那么`<div onClick={function(){this.handleClick()}}></div>`里面的this会指向`<div>`标签
+  - 因为在jsx语法中，html的`<div>`标签会被转换为`React.createElement`元素，因此会丢失this作用域
+  - 不使用箭头函数，也想正常使用this的话，需要在constructor里面设置`this.handleClick.bind(this)`
 
 
 
