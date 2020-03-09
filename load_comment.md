@@ -2,9 +2,12 @@
 
 # 动态加载评论
 
-#### - App.js
-```javascriprt
+<img width="200" src="https://user-images.githubusercontent.com/26485327/76190184-5ea71700-6217-11ea-8d5b-93bfe4bc86d6.png">
+<img width="200" src="https://user-images.githubusercontent.com/26485327/76190082-230c4d00-6217-11ea-8fe0-9a42e568ab29.gif">
 
+
+#### - App.js
+```javascript
 import React, {Component} from 'react'
 import Page from './Page'
 import Comment from './Comment'
