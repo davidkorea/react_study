@@ -7,15 +7,15 @@
 
 
 - create react app + Ant Design + tailwindcss
-  - 1. go to target path, `create-react-app myDemo`, before `yarn start`, install antd
-  - 2. `yarn add antd`, `cnpm install antd --save` faster
+  - 1.go to target path, `create-react-app myDemo`, before `yarn start`, install antd
+  - 2.`yarn add antd`, `cnpm install antd --save` faster
     - ```javascript
       import 'antd/dist/antd.css'
       import {Button} from 'antd'
       ```
-  - 3. cp `tailwind.min.css` to myDemo project src folder
+  - 3.cp `tailwind.min.css` to myDemo project src folder
     - import tailwind to js file by `import './tailwind.min.css'
-  - 4. code
+  - 4.code
     ```javascript
     import React, { Component } from 'react'
     import './tailwind.min.css'
@@ -30,4 +30,6 @@
         )
     }
     ```
+  - 有关antd元素组件的样式，使用antd css，如type shape属性等，可以参考官网
+  - 有关原生html标签div布局的样式，元素间布局，组件间布局，使用tailwindcss
 
