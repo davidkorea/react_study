@@ -7,13 +7,27 @@
 
 
 - create react app + Ant Design + tailwindcss
-  - go to target path, `create-react-app myDemo`, before `yarn start`, install antd
-  - `yarn add antd`, `cnpm install antd --save` faster
+  - 1. go to target path, `create-react-app myDemo`, before `yarn start`, install antd
+  - 2. `yarn add antd`, `cnpm install antd --save` faster
     - ```javascript
       import 'antd/dist/antd.css'
       import {Button} from 'antd'
-
-
       ```
-  - cp `tailwind.min.css` to myDemo project src folder
+  - 3. cp `tailwind.min.css` to myDemo project src folder
     - import tailwind to js file by `import './tailwind.min.css'
+  - 4. code
+    ```javascript
+    import React, { Component } from 'react'
+    import './tailwind.min.css'
+    import 'antd/dist/antd.css'
+    import {Button} from 'antd'
+    
+    function Ex1(){
+        return (
+            <div>
+                <Button className="m-4" type="primary" shape="round">Click</Button>
+            </div>
+        )
+    }
+    ```
+
