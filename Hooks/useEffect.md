@@ -216,5 +216,29 @@ function Index(){
 ```
 ![Mar-15-2020 11-22-30](https://user-images.githubusercontent.com/26485327/76694562-4ae43080-66af-11ea-97a9-48edbee03022.gif)
 
+### 3. 只看主组件的逻辑
+- 点击按钮加一
+- 开始显示log点击了多少次，离开时log显示完成本次操作
+- 由于useEffect中使用了依赖项count，每次点击按钮，状态变化后，都会触发useEffect函数
+    - 而该useEffect函数，每次出发前，由于依赖项的存在，先清除掉上一次的函数，在重新执行一次
+    
+![Mar-15-2020 11-32-26](https://user-images.githubusercontent.com/26485327/76694667-ae229280-66b0-11ea-8402-4c21447002e5.gif)
 
+```javascript
+function Ex3(){
+    const [count, setCount] = useState(0);
+    
+    useEffect(()=>{
+        console.log('')
+        console.log(`${count}th clicked!`)
+        return ()=>console.log(`${count}th click finished! 88`)
+    }, [count])
+    
+    return (        
+        <div className="ex1 flex">
+            <div>{count}</div>
+            <button onClick={()=>setCount(count+1)} className="ml-4 w-10 border-2">+1</button>
+        </div>
+    )
+```
 
