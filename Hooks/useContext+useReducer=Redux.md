@@ -92,7 +92,7 @@ function Ex6(){
 
     return (
         <div className="flex flex-col justify-center items-center">
-            <colorContext.Provider value={{color, dispatch}}>  //  
+            <colorContext.Provider value={{color, dispatch}}>  // 共享多个参数，需要使用{}
                 <ShowArea></ShowArea>
                 <Buttons></Buttons>
             </colorContext.Provider>
@@ -103,14 +103,46 @@ export default Ex6
 ```
 
 
+#### - 子组件 ShowArea
+
+```javascript
+import React, { useContext } from 'react'
+import {colorContext} from './Ex6'
+
+function ShowArea(){
+    const {color} =  useContext(colorContext)
+
+    return (
+    <div className="m-2" style={{color:color}}>The text color is: {color}</div>
+    )
+}
+export default ShowArea
+```
 
 
 
 
+#### - 子组件 Buttons
 
+```javascript
+import React, { Component, useContext } from 'react'
+import {colorContext} from './Ex6'                 // 导入共享的上下文
 
-
-
+function Buttons(){
+    const {dispatch} = useContext(colorContext)    // 从上下文中取出dispatch函数
+    console.log(dispatch);
+    
+    return (
+        <div>                // 通过dispatch函数，将新的action对象传递给useReducer中的reducer函数     
+            <button onClick={()=>dispatch({type:'changeColor',value:'red'})} 
+              className="w-16 m-1 shadow border-2">Red</button>
+            <button onClick={()=>dispatch({type:'changeColor',value:'teal'})} 
+              className="w-16 m-1 shadow border-2">Teal</button>
+        </div>
+    )
+}
+export default Buttons
+```
 
 
 
