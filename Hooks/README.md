@@ -63,7 +63,10 @@ function Ex1(){
       )
   }
 ```
+- 把状态count，添加为依赖项，当依赖项变化时，调用useEffect函数，也会触发useEffect函数中处理函数的return来解绑上一个处理函数
+- 给计数器函数命名，在添加return，当依赖项变化时，执行return后面的函数，来清除上一次的处理函数，也就清除了计时器setInterval
 
+![Mar-15-2020 10-24-27](https://user-images.githubusercontent.com/26485327/76693903-313eeb00-66a7-11ea-8f99-6774529f1789.gif)
 
 
 
