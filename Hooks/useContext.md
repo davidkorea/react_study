@@ -1,4 +1,23 @@
 
+
+#### 创建共享上下文，传递多个参数/方法函数
+```javascript
+export const colorContext =  createContext({}) 
+//创建一个上下文组件，共享多个参数，必须初始化为对象{}，初始化为数组[]报错
+```
+```javascript
+{/*  因为创建createContext时初始化为{}，因此共享多个参数时，需要使用{}包裹
+     使用[]初始化上下文，此处用列表传递多参数时，会报错useReducer的dispatch函数不能使用
+        Uncaught TypeError: dispatch is not a function
+*/}
+<colorContext.Provider value={{color, dispatch}}>
+    <ShowArea></ShowArea>
+    <Buttons></Buttons>
+</colorContext.Provider>
+```
+
+
+-----
 # useContext
 - 父子组件传值，代替class组件中的props，虽然function组件也有props
 - 将父组件中的值（state的值）共享出去，给子组件使用
