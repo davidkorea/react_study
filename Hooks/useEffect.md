@@ -15,8 +15,8 @@ useEffect(() => {
 - 第一个参数处理函数中可以有一个return，用于当依赖项发生变化后，清除当先处理函数
     - 相当于willUnmount的作用 
     
-### Demo1 定时器
-#### 1. 错误
+## Demo1 定时器
+### 1. 错误
 ```javascript
 function Ex1(){
     const [count, setCount] = useState(0)
@@ -43,7 +43,7 @@ function Ex1(){
 ![Mar-15-2020 10-14-05](https://user-images.githubusercontent.com/26485327/76693764-bd501300-66a5-11ea-8370-661a370b4526.gif)
 
 
-#### 2. 正确
+### 2. 正确
 ```diff
   function Ex1(){
       const [count, setCount] = useState(0)
@@ -71,13 +71,13 @@ function Ex1(){
 
 
 
-### Demo2 路由，测试生命周期
+## Demo2 路由，测试生命周期
 - 安装路由 `% cnpm install --save react-router-dom`
 - `import {BrowserRouter as Router, Route, Link} from 'react-router-dom'`
 - 创建2个组件Index和List，通过路由添加到主组件
   - 主组件中添加子组件的路由后，点击子组件，会显示当先组件的名称
 
-#### 1. 主组件本身没有逻辑，仅显示子组件
+### 1. 主组件本身没有逻辑，仅显示子组件
 
 
 ```javascript
@@ -135,9 +135,12 @@ export default Ex3
 
 
 
-#### 1. 主组件有逻辑，同时示子组件
+### 2. 主组件有逻辑，同时示子组件
 - 主组件本身有点击加一功能
     - 每当主组件更新时，当前路由展示的子组件也会先销毁再次加载
+
+![Mar-15-2020 11-14-36](https://user-images.githubusercontent.com/26485327/76694481-30f61e00-66ae-11ea-820f-b621fc654017.gif)
+
 ```javascript
 import React, { useEffect, useState } from 'react'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
@@ -193,7 +196,11 @@ function Ex3(){
 export default Ex3
 ```
 
-
+- 起始主组件变化时，子组件无需跟着变换，因为子组件的状态没有变化
+    - 如果一起变化，造成性能浪费
+- 给子组件的useEffect添加依赖项，添加一个空数组[]，这样表示只有组件加载时，才会调用useEffect
+    - 也就是只有子组件真的被加载时，才会调用useEffect
+    - 而不会跟随父组件的更新而跟随渲染
 
 
 
