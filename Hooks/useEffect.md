@@ -56,7 +56,7 @@ function Ex1(){
           },1000)
 +         return ()=clearInterval(timer)
 -      })
-+.     }, [count])
++      }, [count])
   
       return (
           <div>{count}</div>
@@ -71,10 +71,58 @@ function Ex1(){
 
 
 
-### Demo2 路由
+### Demo2 路由，测试生命周期
+- 安装路由 `% cnpm install --save react-router-dom`
+- `import {BrowserRouter as Router, Route, Link} from 'react-router-dom'`
+- 创建2个组件Index和List，通过路由添加到主组件
+
+```javascript
+import React, { useEffect } from 'react'
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+
+// index组件
+function Index(){
+    useEffect(() => {
+        console.log('============================')
+        console.log('useEffect ----- Index hi');
+        return ()=>console.log('useEffect --- Index 886')
+    });
+    return (
+        <div className="text-2xl mt-10">Index Page</div>
+    )
+}
+
+// list组件
+function List(){
+    useEffect(() => {
+        console.log('============================')
+        console.log('useEffect ----- List hi');
+        return ()=>console.log('useEffect --- List 886')
+
+    });
+    return (
+        <div className="text-2xl mt-10">List Page</div>
+    )
+}
 
 
-
+function Ex3(){
+    const [count, setCount] = useState(0);
+    return (
+        <div className="mt-4 w-64 h-32 border-2 shadow-lg flex flex-col">
+            <Router>
+                <div className="flex text-center">
+                    <div className="border-2 w-12 shadow-md"><Link to="/">index</Link></div>
+                    <div className="border-2 w-12 shadow-md"><Link to="/list/">list</Link></div>
+                </div>
+                <Route path="/" exact component={Index}></Route>
+                <Route path="/list/" component={List}></Route>
+            </Router>
+        </div>
+    )
+}
+export default Ex3
+```
 
 
 
