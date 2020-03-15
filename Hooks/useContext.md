@@ -11,7 +11,7 @@
 ```javascript
 import React, { useState, createContext } from 'react'
 
-const countContext = createContext();        // 创建共享上下文组件
+export const countContext = createContext();        // 创建共享上下文组件，并且要暴露出去
 
 function Ex4(){
     const [count, setcount] = useState(0);
@@ -38,9 +38,10 @@ export default Ex4
 ### 2. 子组件
 ```javascript
 import React, {useContext} from 'react'
+import countContext from './父组件'
 
 function ChildCompnt(){
-    const count = useContext(countContext);   // 接收床底过来的参数，赋值给count变量
+    const count = useContext(countContext);   // 接收传递过来的参数，赋值给count变量
     
     return (
         <div>This is child component. count: {count}</div>
