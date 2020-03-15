@@ -61,3 +61,58 @@ export default Buttons
 ## 2. 动态实现
 - 父组件创建共享状态，字体颜色color
 - 所有子组件获取共享状态，变更状态后再次渲染到父组件
+
+
+#### - 父组件 Ex6
+- 创建上下文，用于共享参数给子组件调用
+  - 此处创建的上下文既传递参数变量出去，也传递方法函数出去（useReducer的dispatch）
+  - **传递多参数时，需要初始化创建上下文为对象{}**
+- 使用UseReducer，既创建出状态state，有创建出根据action类型type变更状态state的reducer函数
+  - **由于useReducer可以直接初始化出一个状态state，因此无需再使用useState创建状态变量**
+  
+
+```javascript
+import React, { createContext, useReducer } from 'react'
+import Buttons from './Buttons'
+import ShowArea from './ShowArea'
+
+export const colorContext =  createContext({}) 
+//创建一个上下文组件，共享color状态，必须是个对象{}，数组[]报错
+
+function Ex6(){
+    // const [color, setcolor] = useState('blue');  // useReducer函数已经创建出了状态
+    const [color, dispatch] = useReducer((state, action)=>{
+        switch(action.type){
+            case "changeColor":
+                return action.value
+            default:
+                return state
+        }
+    }, 'blue')    // 出书话状态变量color为'blue'
+
+    return (
+        <div className="flex flex-col justify-center items-center">
+            <colorContext.Provider value={{color, dispatch}}>  //  
+                <ShowArea></ShowArea>
+                <Buttons></Buttons>
+            </colorContext.Provider>
+        </div>
+    )
+}
+export default Ex6
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
