@@ -33,8 +33,42 @@ function myReducer(state, action){
 
 # 2. react Hook - useReducer
 
+```javascript
+import React, { useReducer } from 'react'
 
+const [state, dispatch] = useReducer(reducer函数, initialState, init)
+```
+- 其中dispatch函数是自带的，无需自行定义，用于事件绑定时，将action传递给reducer函数来处理
+- reducer函数需要自行实现，根据action改变state，并返回新state
 
+```javascript
+import React, { useReducer } from 'react'
+
+function Ex5(){
+    // const [state, dispatch] = useReducer(reducer, initialState, init)
+    const [count, dispatch] = useReducer((state, action)=>{
+        switch(action.type){
+            case "add":
+                return state+action.value
+            case "sub":
+                return state-action.value
+            default:
+                return statae
+        }
+    }, 0)
+    
+    return (
+        <div>
+            <div>My Score is: {count}</div>
+            <br/>
+            <button onClick={()=>dispatch({type:'add',value:1})} className="w-10 border-2 shadow m-1">+1</button>
+            <button onClick={()=>dispatch({type:'add',value:10})} className="w-10 border-2 shadow m-1">+10</button>
+            <button onClick={()=>dispatch({type:'sub',value:1})} className="w-10 border-2 shadow m-1">-1</button>
+        </div>
+    )
+}
+export default Ex5
+```
 
 
 
