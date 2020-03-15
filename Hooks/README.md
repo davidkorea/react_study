@@ -1,6 +1,6 @@
 # Hooks
 
-## 1. useEffect]
+# 1. useEffect
 
 ```javascript
 useEffect(() => {
@@ -15,8 +15,8 @@ useEffect(() => {
   - 依赖项可以是一个useState的状态，也可以是一个普通的变量
 - 第一个参数处理函数中可以有一个return，用于当依赖项发生变化后，清除当先处理函数
     - 相当于willUnmount的作用 
-#### Demo 定时器
-##### 1. 错误
+### Demo 定时器
+#### 1. 错误
 ```javascript
 function Ex1(){
     const [count, setCount] = useState(0)
@@ -41,6 +41,45 @@ function Ex1(){
     - 每次useEffect被触发，新创建一个setInterval定时器函数，新定时器函数又会更改状态...
     
 ![Mar-15-2020 10-14-05](https://user-images.githubusercontent.com/26485327/76693764-bd501300-66a5-11ea-8370-661a370b4526.gif)
+
+
+#### 2. 正确
+```diff
+  function Ex1(){
+      const [count, setCount] = useState(0)
+  
+      useEffect(()=>{
+          console.log('hi')
+-         setInterval(()=>{
++         const timer = setInterval(()=>{
+              setCount(count + 1) //定时器每1s将状态count加1
+          },1000)
++         return ()=clearInterval(timer)
+-      })
++.     }, [count])
+  
+      return (
+          <div>{count}</div>
+      )
+  }
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
