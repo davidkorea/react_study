@@ -75,6 +75,10 @@ function Ex1(){
 - 安装路由 `% cnpm install --save react-router-dom`
 - `import {BrowserRouter as Router, Route, Link} from 'react-router-dom'`
 - 创建2个组件Index和List，通过路由添加到主组件
+  - 主组件中添加子组件的路由后，点击子组件，会显示当先组件的名称
+
+#### 1. 主组件本身没有逻辑，仅显示子组件
+
 
 ```javascript
 import React, { useEffect } from 'react'
@@ -124,13 +128,70 @@ function Ex3(){
 export default Ex3
 ```
 
+- 每次点击切换子组件时，上一个组件执行return来消灭其自身，新被点击的组件将会执行useEffect中的函数
+  - 再次切换组件时，则再次执行销毁当前组件，加载新组件
+
+![Mar-15-2020 11-06-10](https://user-images.githubusercontent.com/26485327/76694427-80881a00-66ad-11ea-8ab7-f5ec8bb90a8b.gif)
 
 
 
+#### 1. 主组件有逻辑，同时示子组件
+- 主组件本身有点击加一功能
+    - 每当主组件更新时，当前路由展示的子组件也会先销毁再次加载
+```javascript
+import React, { useEffect, useState } from 'react'
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+
+
+// index组件
+function Index(){
+    useEffect(() => {
+        console.log('============================')
+        console.log('useEffect ----- Index hi');
+        return ()=>console.log('useEffect --- Index 886')
+    });
+    return (
+        <div className="text-2xl mt-10">Index Page</div>
+    )
+}
+
+// list组件
+function List(){
+    useEffect(() => {
+        console.log('============================')
+        console.log('useEffect ----- List hi');
+        return ()=>console.log('useEffect --- List 886')
+    });
+    return (
+        <div className="text-2xl mt-10">List Page</div>
+    )
+}
 
 
 
-
+function Ex3(){
+    const [count, setCount] = useState(0);
+    return (        
+        <div>
+            <div className="ex1 flex">
+                <div>{count}</div>
+                <button onClick={()=>setCount(count+1)} className="ml-4 w-10 border-2">+1</button>
+            </div>
+            <div className="mt-4 w-64 h-32 border-2 shadow-lg flex flex-col">
+                <Router>
+                    <div className="flex text-center">
+                        <div className="border-2 w-12 shadow-md"><Link to="/">index</Link></div>
+                        <div className="border-2 w-12 shadow-md"><Link to="/list/">list</Link></div>
+                    </div>
+                    <Route path="/" exact component={Index}></Route>
+                    <Route path="/list/" component={List}></Route>
+                </Router>
+            </div>
+        </div>
+    )
+}
+export default Ex3
+```
 
 
 
