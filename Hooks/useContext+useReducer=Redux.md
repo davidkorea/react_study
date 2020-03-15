@@ -62,6 +62,7 @@ export default Buttons
 - 父组件创建共享状态，字体颜色color
 - 所有子组件获取共享状态，变更状态后再次渲染到父组件
 
+![Mar-15-2020 17-15-38](https://user-images.githubusercontent.com/26485327/76698651-a1b62e00-66e0-11ea-98f4-c1dc55e396fe.gif)
 
 #### - 父组件 Ex6
 - 创建上下文，用于共享参数给子组件调用
