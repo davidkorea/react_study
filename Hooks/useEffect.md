@@ -145,7 +145,6 @@ export default Ex3
 import React, { useEffect, useState } from 'react'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
-
 // index组件
 function Index(){
     useEffect(() => {
@@ -169,7 +168,6 @@ function List(){
         <div className="text-2xl mt-10">List Page</div>
     )
 }
-
 
 
 function Ex3(){
@@ -202,6 +200,21 @@ export default Ex3
     - 也就是只有子组件真的被加载时，才会调用useEffect
     - 而不会跟随父组件的更新而跟随渲染
 
+```javascript
+// index组件
+function Index(){
+    useEffect(() => {
+        console.log('============================')
+        console.log('useEffect ----- Index hi');
+        return ()=>console.log('useEffect --- Index 886')
+    }, []);
+    
+    return (
+        <div className="text-2xl mt-10">Index Page</div>
+    )
+}
+```
+![Mar-15-2020 11-22-30](https://user-images.githubusercontent.com/26485327/76694562-4ae43080-66af-11ea-97a9-48edbee03022.gif)
 
 
 
