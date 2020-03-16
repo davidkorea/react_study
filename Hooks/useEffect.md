@@ -1,4 +1,12 @@
 
+
+
+- 别用神奇的`setInterval()`定时器函数了，根本控制不了
+
+- 使用延时函数`setTimeout()`，可控!!
+
+-----
+
 # 1. useEffect
 
 ```javascript
