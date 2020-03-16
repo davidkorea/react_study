@@ -2,9 +2,25 @@
 
 
 - 别用神奇的`setInterval()`定时器函数了，根本控制不了
+    ```javascript
+    const [count, setCount] = useState(10);
+    useEffect(()=>{    
+        const timer = setInterval(() => {
+            console.log('hi');
+            if(count > 0){
+                setCount(count-1)
+            }
+        }, 1000);
+        return ()=>clearInterval(timer)
+    }, [count])
+    ```
+    - 必须添加依赖项count
+    - 必须return清除定时器来清除上一次使用过的setInterval
+    - 设置条件后，不再调用setCount，状态count没有变化，页面也不在更新
+    - **但是！！！ setInterval里面的log依然在执行... 根本定不下来！！！ 依然是浪费资源**，原因就是setInterval是window的函数
 
 - 使用延时函数`setTimeout()`，可控!!
-
+    
 -----
 
 # 1. useEffect
