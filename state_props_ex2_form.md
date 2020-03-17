@@ -101,6 +101,14 @@ function PostForm(props){
 }
 export default PostForm
 ```
+- 对于受控输入框，就是不是直接输入直接显示
+  - 而是先通过onChange事件检测到输入框内容的变化，一边话就setState，把输入框的实时变化赋值给一个状态变量
+  - 而输入框的显示是通过value属性来展示状态变量的值
+  - **因此，这种受控输入框必须同时有value实行和onChange方法，否则报错！！**
+  
+- 按钮buutton，只有onClick事件，**即使在表单form里面也是通过onClick事件来调用函数取变更状态，只不过需要取消默认提交http请求的操作**
+
+
 ## 1.3 子组件Phone
 ```javascript
 import React from 'react'
