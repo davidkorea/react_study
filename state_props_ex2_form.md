@@ -2,7 +2,7 @@
 # state_props_ex2_form
 
 ### 关于表单提交！！
-- 放置于<form></form>标签内的<button type="">按钮，默认就是type="submit"
+- 放置于`<form></form>`标签内的<button type="">按钮，默认就是type="submit"
   - 因此<button>按钮的onClick事件的处理函数需要先`e.preventDefault`来取消默认的向form的action的url提交http请求的动作
   - 再来处理setState
   - react中<button>标签~~没有onSubmit函数~~，而是使用onClick函数
