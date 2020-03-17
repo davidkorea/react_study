@@ -22,7 +22,7 @@
 
 # Demo
 
-![Mar-17-2020 12-34-57](https://user-images.githubusercontent.com/26485327/76822380-c4b12100-684b-11ea-952b-1ebb6c1e8460.gif)
+![Mar-17-2020 12-44-47](https://user-images.githubusercontent.com/26485327/76822825-20c87500-684d-11ea-833c-2fde227d6174.gif)
 
 组件结构如下
 - `App`
@@ -31,6 +31,11 @@
     - `PostForm`
     
 # 1. 子组件
+
+- 起始发现了，左右写的子组件，自己都不用写状态。！！除非你就写了单一组件，但不存在这种项目！！
+- 所需的状态全部fong父组件中创建，在接收过来展示就可以了
+- 如果需要setState，那么就发方法函数也接收回来
+
 ## 1.1 子组件 PostCard
 
 <img width="267" alt="截屏2020-03-17下午12 42 28" src="https://user-images.githubusercontent.com/26485327/76822682-c5968280-684c-11ea-8cb1-3d665bd61b4f.png">
@@ -46,7 +51,6 @@ function PostCard(props){
         </div>
     )
 }
-
 export default PostCard
 ```
 
@@ -57,7 +61,7 @@ export default PostCard
 
 ```javascript
 
-import React, { Component } from 'react'
+import React from 'react'
 
 function PostForm(props){
     // const handleClick = (e)=>{
@@ -67,6 +71,7 @@ function PostForm(props){
 
     return (
         <div className="postform border-2 border-indigo-200 mt-5 shadow-md">
+        
             <form action="">
                 <div className="name text-center bg-indigo-200">Add a new post</div>
                 <div className="titleinput">
@@ -76,6 +81,7 @@ function PostForm(props){
                         onChange={props.changeTitleInput}
                     />
                 </div>
+                
                 <div className="contentinput mt-2">
                     <div className="name">Content</div>
                     <textarea className="resize-none outline-none p-1 w-56 text-gray-600" 
@@ -83,10 +89,12 @@ function PostForm(props){
                         onChange={props.changeContentInput}
                     ></textarea>
                 </div>
+                
                 <button 
                     onClick={(e)=>props.handleClick(e)}
                     className="w-20 bg-indigo-200 rounded-lg border-2"
                 >Submit</button>
+                
             </form>
         </div>
     )
@@ -96,7 +104,6 @@ export default PostForm
 ## 1.3 子组件Phone
 ```javascript
 import React from 'react'
-import './Phone.css'
 
 function Phone({children}){
     return (
@@ -105,7 +112,6 @@ function Phone({children}){
         </div>
     )
 }
-
 export default Phone
 ```
 
@@ -117,7 +123,6 @@ import Phone from './Phone'
 import PostCard from './PostCard'
 import PostForm from './PostForm'
 
-
 function App() {
 
     const [posts, setPosts] = useState([
@@ -126,9 +131,9 @@ function App() {
 
     const [titleInput, setTitleInput] = useState('');
     const [contentInput, setContentInput] = useState('');
+    
     const handleClick = e => {
         e.preventDefault()
-        // console.log('hi');
         setPosts(posts.concat({
             title:titleInput,
             content:contentInput
@@ -136,15 +141,12 @@ function App() {
         setTitleInput('')
         setContentInput('')
     }
+    
     return (
         <div className='flex items-center justify-center h-screen bg-gray-100'>
             <Phone>
                 {posts.map((v,i)=>{
-                    return <PostCard
-                                title={v.title}
-                                content={v.content}
-                                key={i}
-                            ></PostCard>
+                    return <PostCard title={v.title} content={v.content} key={i} />
                 })}
 
                 <PostForm
