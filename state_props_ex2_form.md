@@ -19,3 +19,17 @@
     - 表单内的输入值也是，先根据`<input id="name" name="name">`标签的id属性获取到该元素，再获取该元素的`value`属性，即可获取到输入框的输入值
   
 - 而未放置在表单内部的按钮，onClick事件的处理函数可以直接setState
+
+# Demo
+
+![Mar-17-2020 12-34-57](https://user-images.githubusercontent.com/26485327/76822380-c4b12100-684b-11ea-952b-1ebb6c1e8460.gif)
+
+
+组件结构如下
+- `App`
+  - `Phone`
+    - `PostCard`
+    - `PostForm`
+    
+    
+    
