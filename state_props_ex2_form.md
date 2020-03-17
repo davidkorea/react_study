@@ -29,8 +29,12 @@
   - `Phone`
     - `PostCard`
     - `PostForm`
+    
 # 1. 子组件
 ## 1.1 子组件 PostCard
+
+<img width="267" alt="截屏2020-03-17下午12 42 28" src="https://user-images.githubusercontent.com/26485327/76822682-c5968280-684c-11ea-8cb1-3d665bd61b4f.png">
+
 ```javascript
 import React from 'react'
 
@@ -48,6 +52,8 @@ export default PostCard
 
 
 ## 1.2 子组件 PostForm
+
+<img width="267" alt="截屏2020-03-17下午12 42 48" src="https://user-images.githubusercontent.com/26485327/76822705-d0511780-684c-11ea-9ad1-cf915b6d921d.png">
 
 ```javascript
 
