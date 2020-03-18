@@ -34,6 +34,8 @@ function Index(){       // no need to import react, next will handle all of this
 }
 export default Index
 ```
+  - **放在pages文件夹下的文件会自动被next设置路由，进行服务器端渲染，并同步数据**
+
 5. `yarn dev`, `npm run dev` to start localhost server 
 
 ## 脚手架
