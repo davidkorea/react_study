@@ -43,7 +43,10 @@ export default Index
 ```
 sudo cnpm install -g create-next-app
 ```
-
+1. `npx create-next-app myNextApp`
+2. `cd myNextApp`
+3. `yarn dev`
+4. `http://localhost:3000/`
 
 
 
