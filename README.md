@@ -14,6 +14,8 @@
         "start": "next start"
     },
 ```
+4. create `pages` folder in the root path of project folder
+
 
 
 
