@@ -14,7 +14,19 @@
         "start": "next start"
     },
 ```
-4. create `pages` folder in the root path of project folder
+4. create `pages` folder in the root path of project folder, and create `index.js` under pages folder
+```javascript
+function Index(){       // no need to import react, next will handle all of this
+    return (
+        <div>
+            hello world
+        </div>
+    )
+}
+export default Index
+```
+5. `yarn dev`, `npm run dev` to start localhost server 
+
 
 
 
