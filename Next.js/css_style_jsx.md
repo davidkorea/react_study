@@ -4,6 +4,7 @@
 
 next不支持importcss文件，需要直接在组件js文件中使用style jsx
 
+## 1. 静态样式
 ```javascript
 function Testcss(){
     return (
@@ -21,4 +22,46 @@ function Testcss(){
 
 export default Testcss
 ```
-- 需要在return的第一次标签内，签入style标签，花括号里面需要一对`，`{\` origin css styles \`}`
+- 需要在return的第一次标签内，签入style标签，花括号里面需要一对\`，`{\` origin css styles \`}`
+
+
+## 2. 动态改变样式
+```javascript
+import { useState } from "react"
+
+function Testcss(){
+    const [color, setColor] = useState('red');
+    const changeColor = ()=>{
+        setColor(color=='red'? 'blue' : 'red')
+    }
+    
+    return (
+        <div>
+            <div>test css with style jsx</div>
+            <button onClick={changeColor}>change color</button>
+
+            <style jsx>
+            {`
+                div{color:${color};}
+            `}
+            </style>
+        </div>
+    )
+}
+
+export default Testcss
+```
+- style jsx中，css样式的属性值直接使用定义的状态变量`${state}`
+
+
+
+
+
+
+
+
+
+
+
+
+
