@@ -4,6 +4,8 @@
 
 -----
 
+- API test： [https://www.easy-mock.com/](https://www.easy-mock.com/project/5e772e153ab3b77dfe8689c7)
+
 - VSCode Plugin： [ES7 React/Redux/GraphQL/React-Native snippets - dsznajder](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
   - `imrse`: import React, { useState, useEffect } from 'react'
   - `imrcp`: import React, { Component } from 'react'
