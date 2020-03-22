@@ -24,7 +24,7 @@ function Testcss(){
 
 export default Testcss
 ```
-- 需要在return的第一次标签内，签入style标签，花括号里面需要一对\`，`{\` origin css styles \`}`
+- 需要在return的第一次标签内，签入style标签，**花括号里面需要一对\`**
 
 
 # 2. 动态改变样式
