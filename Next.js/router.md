@@ -3,8 +3,9 @@
 - next的路由直接显示一个完整的页面，而不是加载点之后的局部空间内加载新页面
 
 -----
-# Router & Link
-
+# Router & Link & query传参
+- next只能使用query来传参 `?id=1`，接收参数的页面需要使用`withRouter`来接收参数
+  - react-router-dom 支持path传参 `/path/:id`
 - 所有在pages目录下的js文件，都会被next自动路由
   - 使用时，无需import，直接填写文件路径即可，如`<Link href='page1'><a>page1</a><Link>`
   - 该href中的路径回显示为浏览器中的url
@@ -47,9 +48,55 @@ function Index(){
 export default Index
 ```
 
+# 3. 传参
 
+- next必须使用query的方式传递参数，即`?id=1&name=hi`
 
+### 3.1 Link传参
 
+- Link和上面一样，没有新用法
+- **接收参数的页面需要使用withRouter将组件包裹后export出去，否则拿不到url的参数**
+
+```javascript
+// index.js
+
+import Link from 'next/link'
+
+function Index(){
+  return (
+    <div>
+      <div className="title">hi</div>
+      <Link href='/page1?name=david'><a>david</a></Link><br/>
+      <Link href='/page1?name=davidson'><a>davidson</a></Link><br/>
+      <Link href='/page1?name=dive'><a>dive</a></Link><br/>
+    </div>
+  )
+}
+
+export default Index
+```
+
+```javascript
+// page1.js
+
+import Link from 'next/link'
+import {withRouter} from 'next/router'
+ 
+function Page1({router}){     
+    return (
+        <div>
+            <div className="page1">page1</div>
+            <div>I am {router.query.name}, hello!!!!!</div>
+            <Link href='/'><a>home page</a></Link>
+        </div>
+    )
+}
+
+export default withRouter(Page1)
+```
+- 组件函数接收一个参数，可以接收props，使用`props.router.query`来接收参数
+  - 组件函数使用`{router}` 接收参数更方便，因为就传递进来这一个参数
+- export时，必须使用withRouter包裹组件后，暴露出去，否则组件函数接收不到路由参数
 
 
 
