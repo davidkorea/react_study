@@ -98,6 +98,50 @@ export default withRouter(Page1)
   - 组件函数使用`{router}` 接收参数更方便，因为就传递进来这一个参数
 - export时，必须使用withRouter包裹组件后，暴露出去，否则组件函数接收不到路由参数
 
+### 3.2 Router.push传参
+
+```javascript
+// index.js
+
+
+import Link from 'next/link'
+import Router from 'next/router'
+
+function Index(){
+
+  const handleClick = ()=>{
+    // Router.push('/page1?name=joyce')
+    Router.push({
+      pathname:'/page1',
+      query:{name:'joyce'}
+    })
+  }
+  
+  return (
+    <div>
+      <div className="title">hi</div>
+      <Link href='/page1?name=david'><a>david</a></Link><br/>
+      <Link href='/page1?name=davidson'><a>davidson</a></Link><br/>
+      <Link href='/page1?name=dive'><a>dive</a></Link><br/>
+      <div>
+        <button onClick={handleClick}>joyce</button>
+      </div>
+    </div>
+  )
+}
+export default Index
+```
+- 接收参数的页面依然需要使用withRouter来export组件
+- 使用按钮的onClick事件，来传递参数
+- Router.push有两种方式传递参数
+  - `Router.push('/page1?name=joyce')`
+  - ```
+    Router.push({
+      pathname:'/page1',
+      query:{name:'joyce'}
+    })
+    ```
+    -实际上这种分开写的方式，在Link中的href中也能使用
 
 
 
