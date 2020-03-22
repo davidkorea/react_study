@@ -3,7 +3,9 @@
 - next的路由直接显示一个完整的页面，而不是加载点之后的局部空间内加载新页面
 
 -----
-# Router & Link & query传参
+# Router & Link & query传参 & 路由勾子事件
+
+- 路由勾子事件可以用于**转场时添加动画**
 - next只能使用query来传参 `?id=1`，接收参数的页面需要使用`withRouter`来接收参数
   - react-router-dom 支持path传参 `/path/:id`
 - 所有在pages目录下的js文件，都会被next自动路由
@@ -146,8 +148,13 @@ export default Index
     - 实际上这种分开写的方式，在Link中的href中也能使用
 
 
+# 4. 路由勾子事件
 
-
-
+- `routeChangeStart(url)` - 路由开始切换时触发
+- `routeChangeComplete(url)` - 完成路由切换时触发
+- `routeChangeError(err, url)` - 路由切换报错时触发
+- `beforeHistoryChange(url)` - 浏览器 history 模式开始切换时触发
+- `hashChangeStart(url)` - 开始切换 hash 值但是没有切换页面路由时触发
+- `hashChangeComplete(url)` - 完成切换 hash 值但是没有切换页面路由时触发
 
 
