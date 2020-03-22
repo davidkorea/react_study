@@ -134,14 +134,16 @@ export default Index
 - 接收参数的页面依然需要使用withRouter来export组件
 - 使用按钮的onClick事件，来传递参数
 - Router.push有两种方式传递参数
-  - `Router.push('/page1?name=joyce')`
-  - ```
+  - ```javascript
+    Router.push('/page1?name=joyce')
+    ```
+  - ```javascript
     Router.push({
       pathname:'/page1',
       query:{name:'joyce'}
     })
     ```
-    -实际上这种分开写的方式，在Link中的href中也能使用
+    - 实际上这种分开写的方式，在Link中的href中也能使用
 
 
 
