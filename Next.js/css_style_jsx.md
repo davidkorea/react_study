@@ -2,7 +2,7 @@
 
 # css_style_jsx
 
-next不支持importcss文件，需要直接在组件js文件中使用style jsx
+next不支持`import './css.css'`文件，需要直接在组件js文件中使用style jsx
 
 # 1. 静态样式
 - 在pages目录下创建testcss.js页面，无需额外设置，直接在浏览器访问`http://localhost:3000/testcss`即可，next已经处理好路由
