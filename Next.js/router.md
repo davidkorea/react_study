@@ -1,5 +1,9 @@
 
-# router & link
+- 不同于 react-router-dom，每次指代加载点处显示路由之后的页面
+- next的路由直接显示一个完整的页面，而不是加载点之后的局部空间内加载新页面
+
+-----
+# Router & Link
 
 - 所有在pages目录下的js文件，都会被next自动路由
   - 使用时，无需import，直接填写文件路径即可，如`<Link href='page1'><a>page1</a><Link>`
@@ -29,4 +33,28 @@ export default Index
 
 
 # 2. Router.push
+
+```javascript
+import Router from 'next/router'
+function Index(){
+  return (
+    <div>
+        <button onClick={()=>Router.push('/page1')}>page1</button>
+    </div>
+  )
+}
+
+export default Index
+```
+
+
+
+
+
+
+
+
+
+
+
 
