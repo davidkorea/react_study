@@ -14,8 +14,7 @@ import Link from 'next/link'
 import {withRouter} from 'next/router'
 import axios from 'axios' 
 
-
-function Page1({router, data}){
+function Page1({router, data}){      // 参数data是getInitialProps中请求的json数据的第二个data Array
      console.log(router);
      
     return (
@@ -28,7 +27,7 @@ function Page1({router, data}){
     )
 }
 
-Page1.getInitialProps = async ()=>{
+Page1.getInitialProps = async ()=>{               // next的ajax请求固定格式
     const promise = new Promise((resolve)=>{
         axios('https://www.easy-mock.com/mock/5e772e153ab3b77dfe8689c7/test/nextjs').then(
             res=>{
@@ -39,7 +38,6 @@ Page1.getInitialProps = async ()=>{
     })
     return await promise
 }
-
 
 export default withRouter(Page1)
 ```
