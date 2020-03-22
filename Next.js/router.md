@@ -157,4 +157,9 @@ export default Index
 - `hashChangeStart(url)` - 开始切换 hash 值但是没有切换页面路由时触发
 - `hashChangeComplete(url)` - 完成切换 hash 值但是没有切换页面路由时触发
 
+```javascript
+  Router.events.on('routeChangeStart', (...args)=>{
+    console.log(...args)
+  })
+```
 
