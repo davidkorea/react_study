@@ -2,12 +2,13 @@
 #### 另一种使用方式，单独创建一个上下文组件
 
 ```javascript
+// components/contexts/GlobalContext.js
+
 import React, { createContext } from 'react'
 
 export const GlobalContext = createContext()
 
 function GlobalContextProvider(props){
-
     return (
         <GlobalContext.Provider>
             {props.childern}
