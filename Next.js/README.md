@@ -1,3 +1,9 @@
+- 放在项目pages文件夹 下面的页面会自动生成路由，无需配置页面路由，可以直接访问页面
+  - `/pages/list.js`，localhost:3000/list可以直接访问
+  - 嵌套文件夹的形式，也可以生成多层路由`/pages/blog/list.js`，可以`localhost:3000/blog/list`，文件夹路径可以直接用做url
+  
+-----
+
 # Next.js
 
 - all React and Vue app are SPA, single page application
