@@ -437,6 +437,7 @@ async news() {
 ```
 
 
+<img width="300" src="https://user-images.githubusercontent.com/26485327/79110031-2497da80-7dac-11ea-86c1-91d449fc538c.png">
 
 
 
