@@ -1,6 +1,7 @@
 
 # Egg.js based on koa
 
+- VSCode egg 插件 [eggjs](https://marketplace.visualstudio.com/items?itemName=atian25.eggjs)
 
 ## 1. get started
 - [Egg 官方文档](https://eggjs.org/zh-cn/intro/quickstart.html)
@@ -31,7 +32,7 @@ egg-project
 |   ├── router.js               路由，通过路由中的配置找对对应控制器，再执行控制器中的函数方法
 │   ├── controller              MVC->Controller
 │   |   └── home.js
-│   ├── service (可选)           MVC->Model
+│   ├── service (可选)           MVC->Model 查询数据库，请求接口数据
 │   |   └── user.js
 │   ├── middleware (可选)
 │   |   └── response_time.js
