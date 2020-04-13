@@ -37,7 +37,7 @@ egg-project
 │   |   └── response_time.js
 │   ├── schedule (可选)
 │   |   └── my_task.js
-│   ├── public (可选)
+│   ├── public (可选)            静态资源css，img
 │   |   └── reset.css
 │   ├── view (可选)              MVC->View
 │   |   └── home.tpl
@@ -78,7 +78,7 @@ module.exports = app => {
 };
 ```
 - controller
-```javascipt
+```javascript
 // app/controller/home.js
 
 'use strict';
@@ -92,10 +92,15 @@ class HomeController extends Controller {
   }
 
   async index() {
-    const { ctx } = this;
-    ctx.body = 'list page';
+    this.ctx.body = 'list page';
+    // koa中直接使用ctx.body='list page'， egg进行了再次包装，需要调用this
   }
 }
 
 module.exports = HomeController;
 ```
+- 该控制器的文件名称home.js 需要和内部命名  HomeController 一一对应
+  - 控制器admin.js需要使用AdminControllerAdmin来命名
+
+
+
