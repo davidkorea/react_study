@@ -181,15 +181,22 @@ news page{"id":"123"}
 
 
 
-# 4. 模板引擎 egg-view-ejs
+# 4. 模板引擎 egg-view-ejs `await this.ctx.render`
 
 - [egg view plugin for ejs](https://github.com/eggjs/egg-view-ejs)
 
 - `cnpm install --save egg-view-ejs`
 
 - usage
-```javascript
+```diff
 // {app_root}/config/plugin.js
+
+- module.exports = {
+-   // had enabled by egg
+-   // static: {
+-   //   enable: true,
+-   // }
+- };
 
 exports.ejs = {
   enable: true,
@@ -224,6 +231,7 @@ module.exports = appInfo => {
 +     '.html': 'ejs',    // 将view文件夹下面的.html文件使用ejs模板引擎解析
 +   },                  
 + };
+
   return {
     ...config,
     ...userConfig,
@@ -232,6 +240,18 @@ module.exports = appInfo => {
 
 ```
 
+
+1. 创建`app/view`文件夹
+2. 创建`app/view/news.html`
+3. 更改controller中的home.news方法，使其使用模板渲染news.html，注意使用**！！！await！！！**，否则404 Not Found错误
+```javascript
+async news() {
+    // let params = this.ctx.params
+    // this.ctx.body = 'news page' + JSON.stringify(params);
+    await this.ctx.render('news')   // 一定是 await！！！！！！！！！
+  }
+```
+<img width="300"  src="https://user-images.githubusercontent.com/26485327/79106392-fe227100-7da4-11ea-9b95-73e6f0147587.png">
 
 
 
