@@ -105,3 +105,43 @@ module.exports = HomeController;
 
 
 
+
+## 3. 路由传值
+
+### 3.1 URL GET `this.ctx.query`
+```javascript
+// app/controller/home.js
+
+'use strict';
+
+const Controller = require('egg').Controller;
+
+class HomeController extends Controller {
+  async index() {
+    const { ctx } = this;
+    ctx.body = 'hi, egg';
+  }
+
+  async list() {
+    let query = this.ctx.query   // 获取url传递的参数
+    this.ctx.body = 'list page' + JSON.stringify(query);
+  }
+}
+
+module.exports = HomeController;
+```
+- `http://127.0.0.1:7001/list?id=123&name=hi`
+```
+list page{"id":"123","name":"hi"}
+```
+
+### 3.2 
+
+
+
+
+
+
+
+
+
