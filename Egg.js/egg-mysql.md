@@ -61,9 +61,9 @@ module.exports = appInfo => {
 
 
 5. controller
-```javaascript
+```javascript
 async index() {
-    let result = await this.app.mysql.get('blog_content', {}) // 获取mysql的blog_content表中的数据
+    let result = await this.app.mysql.get('blog_content', {})   // 获取mysql的blog_content表中的数据
     this.ctx.body = result
   }
 ```
