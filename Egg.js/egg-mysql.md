@@ -57,6 +57,9 @@ module.exports = appInfo => {
 ```
 4. 在数据库中创建blog_content表，并添加一条记录
 
+<img width="760" src="https://user-images.githubusercontent.com/26485327/79130230-32178980-7dd9-11ea-97f3-a21d23128182.png">
+
+
 5. controller
 ```javaascript
 async index() {
