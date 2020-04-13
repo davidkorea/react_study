@@ -73,6 +73,8 @@ egg-project
 module.exports = app => {
   const { router, controller } = app;
   router.get('/', controller.home.index);
+  router.get('/list', controller.home.list);
+
 };
 ```
 - controller
@@ -87,6 +89,11 @@ class HomeController extends Controller {
   async index() {
     const { ctx } = this;
     ctx.body = 'hi, egg';
+  }
+
+  async index() {
+    const { ctx } = this;
+    ctx.body = 'list page';
   }
 }
 
