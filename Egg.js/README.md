@@ -287,10 +287,28 @@ async news() {
 
 
 
+# 4. 静态资源
 
+1. images
+- 在public文件夹下面 创建images文件夹，放入图片文件，并在html中 引入
+```html
+<img src="/public/images/1.jpg" alt="">
+```
 
+2. css
+- 在public文件夹下面 创建css文件夹，在创建style.css文件，并在html中 引入
+```
+// style.css
 
+div {
+    color: red
+}
+```
+```html
+<head>
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+```
 
-
-
+<img width="400"  src="https://user-images.githubusercontent.com/26485327/79107631-50fd2800-7da7-11ea-846e-b43312fbb6c9.png">
 
