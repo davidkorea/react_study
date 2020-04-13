@@ -287,7 +287,7 @@ async news() {
 
 
 
-# 4. 静态资源
+# 5. 静态资源
 
 1. images
 - 在public文件夹下面 创建images文件夹，放入图片文件，并在html中 引入
@@ -297,7 +297,7 @@ async news() {
 
 2. css
 - 在public文件夹下面 创建css文件夹，在创建style.css文件，并在html中 引入
-```
+```html
 // style.css
 
 div {
@@ -311,4 +311,62 @@ div {
 ```
 
 <img width="400"  src="https://user-images.githubusercontent.com/26485327/79107631-50fd2800-7da7-11ea-846e-b43312fbb6c9.png">
+
+
+
+
+# 6. Service(Model)
+
+
+- 将数据在controller中分离至model里面，egg中叫做service
+
+### 6.1 创建service文件
+在app文件夹下面创建service文件夹，然后再创建`news.js`文件
+
+```javascript
+// app/service/news.js
+
+'use strict';
+
+const Service  =  require('egg').Service;
+
+class NewsService extends Service{
+ async getNews(){
+     var list = [111,222,333,444];
+     return list;
+ }
+}
+
+module.exports = NewsService
+```
+
+### 6.2 控制器调用服务中的数据 `await this.service.`
+
+控制器调用service（model）中的数据
+
+```javascript
+async news() {
+    let params = JSON.stringify(this.ctx.params)
+    // this.ctx.body = 'news page' + JSON.stringify(params);
+    // let list = [111,222,333]
+    
+    var list = await this.service.news.getNews();
+    await this.ctx.render('news', {
+      params:params,
+      list
+    })
+  }
+```
+
+<img width="300"  src="https://user-images.githubusercontent.com/26485327/79108809-b18d6480-7da9-11ea-8b8f-a15cbd3ed825.png">
+
+
+
+
+
+
+
+
+
+
 
