@@ -28,7 +28,7 @@ egg-project
 ├── app.js (可选)
 ├── agent.js (可选)
 ├── app
-|   ├── router.js               路由
+|   ├── router.js               路由，通过路由中的配置找对对应控制器，再执行控制器中的函数方法
 │   ├── controller              MVC->Controller
 │   |   └── home.js
 │   ├── service (可选)           MVC->Model
@@ -60,4 +60,35 @@ egg-project
     |   └── response_time.test.js
     └── controller
         └── home.test.js
+```
+
+- router
+```javascript
+// app/router.js
+
+'use strict';
+/**
+ * @param {Egg.Application} app - egg application
+ */
+module.exports = app => {
+  const { router, controller } = app;
+  router.get('/', controller.home.index);
+};
+```
+- controller
+```javascipt
+// app/controller/home.js
+
+'use strict';
+
+const Controller = require('egg').Controller;
+
+class HomeController extends Controller {
+  async index() {
+    const { ctx } = this;
+    ctx.body = 'hi, egg';
+  }
+}
+
+module.exports = HomeController;
 ```
