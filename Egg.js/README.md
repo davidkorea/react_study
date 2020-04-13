@@ -108,7 +108,7 @@ module.exports = HomeController;
 
 ## 3. 路由传值
 
-### 3.1 URL GET `this.ctx.query`
+### 3.1 URL GET？传值 `this.ctx.query`
 ```javascript
 // app/controller/home.js
 
@@ -135,11 +135,49 @@ module.exports = HomeController;
 list page{"id":"123","name":"hi"}
 ```
 
-### 3.2 
+### 3.2 动态传值 `this.ctx.params`
+
+- router
+```javascript
+module.exports = app => {
+  const { router, controller } = app;
+  router.get('/', controller.home.index);
+  router.get('/list', controller.home.list);
+  router.get('/news/:id', controller.home.news);
+};
+```
 
 
+- controller
 
+```javascript
+'use strict';
 
+const Controller = require('egg').Controller;
+
+class HomeController extends Controller {
+  async index() {
+    const { ctx } = this;
+    ctx.body = 'hi, egg';
+  }
+
+  async list() {
+    let query = this.ctx.query
+    this.ctx.body = 'list page' + JSON.stringify(query);
+  }
+
+  async news() {
+    let params = this.ctx.params    // 获取动态路由传递参数
+    this.ctx.body = 'news page' + JSON.stringify(params);
+  }
+}
+
+module.exports = HomeController;
+```
+- `http://127.0.0.1:7001/news/123`
+```
+news page{"id":"123"}
+```
 
 
 
