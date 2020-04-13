@@ -32,7 +32,7 @@ module.exports = appInfo => {
     // database configuration
     client: {
       // host
-      host: 'locallhost',
+      host: 'localhost',
       // port
       port: '3306',
       // username
@@ -55,3 +55,14 @@ module.exports = appInfo => {
 };
 
 ```
+4. 在数据库中创建blog_content表，并添加一条记录
+
+5. controller
+```javaascript
+async index() {
+    let result = await this.app.mysql.get('blog_content', {}) // 获取mysql的blog_content表中的数据
+    this.ctx.body = result
+  }
+```
+
+<img width="360" src="https://user-images.githubusercontent.com/26485327/79130041-e7960d00-7dd8-11ea-8bd8-04857b26ef9e.png">
