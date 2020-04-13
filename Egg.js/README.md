@@ -10,3 +10,9 @@ Koa 是一个新的 web 框架，由 Express 幕后的原班人马打造， 致�
 2. `mkdir egg_study &&  cd egg_study`
 3. `egg-init egg_test_1` --simple
 4. `cd egg_test_1`,`cnpm install`
+  ```
+  yong@MacBookPro egg_test_1 % ls
+  README.md	appveyor.yml	node_modules	test
+  app		config		package.json
+   ```
+5. `npm run dev` -> http://127.0.0.1:7001
