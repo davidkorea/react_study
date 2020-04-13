@@ -254,7 +254,32 @@ async news() {
 <img width="300"  src="https://user-images.githubusercontent.com/26485327/79106392-fe227100-7da4-11ea-9b95-73e6f0147587.png">
 
 
-
+4. 传递参数
+```javaascript
+async news() {
+    let params = JSON.stringify(this.ctx.params)
+    // this.ctx.body = 'news page' + JSON.stringify(params);
+    let list = [111,222,333]
+    await this.ctx.render('news', {
+      params:params,
+      list
+    })
+  }
+```
+```html
+<body>
+    <div>This is News Page
+        <%=params%>
+    </div>
+    <ul>
+        <% for(var i=0; i<list.length; i++){ %>
+            <li>
+                <%=list[i]%>
+            </li>
+            <%}%>
+    </ul>
+</body>
+```
 
 
 
