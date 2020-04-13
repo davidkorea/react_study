@@ -188,22 +188,48 @@ news page{"id":"123"}
 - `cnpm install --save egg-view-ejs`
 
 - usage
-```
+```javascript
 // {app_root}/config/plugin.js
 
 exports.ejs = {
   enable: true,
   package: 'egg-view-ejs',
 };
-
-
+```
+```diff
 // {app_root}/config/config.default.js
 
-exports.view = {
-  mapping: {
-    '.html': 'ejs',
-  },
+
+module.exports = appInfo => {
+  /**
+   * built-in config
+   * @type {Egg.EggAppConfig}
+   **/
+  const config = exports = {};
+
+  // use for cookie sign key, should change to your own and keep security
+  config.keys = appInfo.name + '_1586762318604_8164';
+
+  // add your middleware config here
+  config.middleware = [];
+
+  // add your user config here
+  const userConfig = {
+    // myAppName: 'egg',
+  };
+
+
++ config.view = {
++   mapping: {
++     '.html': 'ejs',    // 将view文件夹下面的.html文件使用ejs模板引擎解析
++   },                  
++ };
+  return {
+    ...config,
+    ...userConfig,
+  };
 };
+
 ```
 
 
