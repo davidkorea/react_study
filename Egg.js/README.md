@@ -255,7 +255,7 @@ async news() {
 
 
 4. 传递参数
-```javaascript
+```javascript
 async news() {
     let params = JSON.stringify(this.ctx.params)
     // this.ctx.body = 'news page' + JSON.stringify(params);
@@ -276,11 +276,12 @@ async news() {
             <li>
                 <%=list[i]%>
             </li>
-            <%}%>
+        <% } %>
     </ul>
 </body>
 ```
 
+<img width="300"  src="https://user-images.githubusercontent.com/26485327/79107006-2fe80780-7da6-11ea-97ae-01f0b3d8ea35.png">
 
 
 
