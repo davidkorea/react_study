@@ -1,0 +1,57 @@
+# egg-mysql
+
+- [[NPM]egg-mysql](https://www.npmjs.com/package/egg-mysql)
+
+
+1. `cnpm install --save egg-mysql`
+2. `config/plugin.js`
+```jaavascript
+exports.mysql = {
+  enable:true,
+  package: 'egg-mysql',
+};
+```
+3. `config/config.default.js`
+```javascript
+module.exports = appInfo => {
+  const config = exports = {};
+  config.keys = appInfo.name + '_1586762318604_8164';
+  config.middleware = [];
+  const userConfig = {
+  };
+
+  config.view = {
+    mapping: {
+      '.html': 'ejs',
+    },
+  };
+
+  config.api = 'http://127.0.0.1:7001/'
+
+  config.mysql = {
+    // database configuration
+    client: {
+      // host
+      host: 'locallhost',
+      // port
+      port: '3306',
+      // username
+      user: 'root',
+      // password
+      password: 'root',
+      // database
+      database: 'egg-db',    
+    },
+    // load into app, default is open
+    app: true,
+    // load into agent, default is close
+    agent: false,
+  };
+
+  return {
+    ...config,
+    ...userConfig,
+  };
+};
+
+```
