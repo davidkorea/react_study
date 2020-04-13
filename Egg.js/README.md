@@ -363,7 +363,7 @@ async news() {
 
 
 # 7.Controller & Service 属性
-### 7.1 Controller
+## 7.1 Controller
 定义的 Controller 类，会在每一个请求访问到 server 时实例化一个全新的对象，而项目中的 Controller 类继承于 egg.Controller，会有下面几个属性挂在 this 上。
 
 - this.ctx: 当前请求的上下文 Context 对象的实例，通过它我们可以拿到框架封装好的处理当前请求的各种便捷属性和方法。
@@ -373,7 +373,7 @@ async news() {
 - this.logger：logger 对象，上面有四个方法（debug，info，warn，error），分别代表打印四个不同级别的日志，使用方法和效果与 context logger 中介绍的一样，但是通过这个 logger 对象记录的日志，在日志前面会加上打印该日志的文件路径，以便快速定位日志打印位置。
 
 
-### 7.1 Service
+## 7.1 Service
 
 每一次用户请求，框架都会实例化对应的 Service 实例，由于它继承于 egg.Service，故拥有下列属性方便我们进行开发：
 
@@ -382,6 +382,61 @@ async news() {
 - this.service：应用定义的 Service，通过它我们可以访问到其他业务层，等价于 this.ctx.service 。
 - this.config：应用运行时的配置项。
 - this.logger：logger 对象，上面有四个方法（debug，info，warn，error），分别代表打印四个不同级别的日志，使用方法和效果与 context logger 中介绍的一样，但是通过这个 logger 对象记录的日志，在日志前面会加上打印该日志的文件路径，以便快速定位日志打印位置。
+
+
+
+因此可以再config文件中定义一个默认全局变量，供controller和service使用
+```diff
+// config/config.default.js
+
+'use strict';
+
+module.exports = appInfo => {
+  const config = exports = {};
+  config.keys = appInfo.name + '_1586762318604_8164';
+  config.middleware = [];
+  const userConfig = {
+  };
+
+  config.view = {
+    mapping: {
+      '.html': 'ejs',
+    },
+  };
+
++ config.api = 'http://127.0.0.1:7001/'
+
+  return {
+    ...config,
+    ...userConfig,
+  };
+};
+```
+```javascript
+// controller
+
+async news() {
+    let params = JSON.stringify(this.ctx.params)
+    // this.ctx.body = 'news page' + JSON.stringify(params);
+    // let list = [111,222,333]
+    let list = await this.service.news.getNews();
+    
+    let api = await this.config.api   // 调用全局配置中的变量
+    await this.ctx.render('news', {
+      api:api,
+      params:params,
+      list
+    })
+  }
+```
+
+```html
+<body>
+    <h2><%=api%></h2>
+</body>
+```
+
+
 
 
 
