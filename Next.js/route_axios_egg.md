@@ -85,12 +85,10 @@ module.exports = HomeController;
 # 2. Next前端，路由传值与请求
 
 ## 2.1 列表页面
-```jaavascript
-import Head from 'next/head'
+```javascript
 import axios from 'axios'
 import { useState } from 'react';
 import Link from 'next/link'
-
 
 function Index(data){   // 传递从下面getInitialProps中返回的数据
   console.log('data: ',data.data);
