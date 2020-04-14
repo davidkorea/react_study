@@ -8,12 +8,13 @@
 
 
 
-# frontend
+# 1. Frontend
 
+## 1.1 Next项目配置
 #### 1. 创建nextapp项目
 `npx create-next-app blog1`, `cd blog1`, `yarn dev`
 
-#### 2. 清理无用代码 pages/index.js，
+#### 2. 清理无用代码 pages/index.js
 ```javascript
 import Head from 'next/head'
 
@@ -111,7 +112,29 @@ export default Home
 
 
 
+## 1.2 页面组件结构
+Next.js和Taro一样，页面和组件分开放置，且Next将pages目录下的页面全部默认自动添加了路由，可以直接访问该目录下所有页面
 
+```
+/blog
+  .babelrc
+  next.config.js
+  
+  /components
+     Header.js              <-> /public/css/components/Header.css
+     
+  /pages
+     index.js
+     
+  /public
+     /css
+        /components
+            Header.css
+        
+        /components
+        /pages
+        common.js
+```
 
 
 
