@@ -124,3 +124,33 @@ module.exports = app => {
 
 
 <img width="690" src="https://user-images.githubusercontent.com/26485327/79175641-d7aa1780-7e30-11ea-8c83-064aa91bbdbc.png">
+
+
+# 3. mysql timestamp
+
+- unix timestamp [站长工具 > Unix时间戳](http://tool.chinaz.com/Tools/unixtime.aspx)
+- unix时间戳和js中`Date.getTime() = 1586831686519 `拿到的位数不同，js需要`Math.round(new Date().getTime()/1000)`获得11位时间戳
+- 将11位unix时间戳存储为int类型，并通过`FROM_UNIXTIME(timestaamp, '%Y-%m-%d %H:%i:%s')`转化为正常时间显示
+
+```
+mysql> SELECT add_time  FROM blog_article;
++------------+
+| add_time   |
++------------+
+| 1586832761 |
+| 1586832799 |
++------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT FROM_UNIXTIME(add_time,'%Y-%m-%d')  FROM blog_article;
++------------------------------------+
+| FROM_UNIXTIME(add_time,'%Y-%m-%d') |
++------------------------------------+
+| 2020-04-14                         |
+| 2020-04-14                         |
++------------------------------------+
+2 rows in set (0.00 sec)
+```
+
+
+
