@@ -8,7 +8,44 @@ Index.getInitialProps = async ()=>{
 }
 ```
 
+```
+import Head from 'next/head'
+import axios from 'axios'
+import { useState } from 'react';
 
+function Index(initprops){
+  console.log('data: ', initprops.data);
+  const [list, setList] = useState(initprops.data);
+
+  return (
+    <div>
+      <div>index page</div>
+      <div>
+        {
+          list.map((v,i)=>{
+            return (
+                <li key={i}>
+                  <ul>{v.article_title}</ul>
+                  <ul>{v.article_intro}</ul>
+                </li>
+            )
+          })
+        }
+      </div>
+    </div>
+  )
+}
+
+Index.getInitialProps = async ()=>{
+  const response = await axios('http://127.0.0.1:7001/getarticlelist')
+  const data = await response.data
+  // console.log(data);
+  return data               // 此处返回的数据，可以在上面的函数中通过参数来接收，参数名叫什么不重要
+}
+
+export default Index
+
+```
 
 
 # axios & getInitialProps & withRouter
