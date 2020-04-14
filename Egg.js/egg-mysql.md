@@ -76,19 +76,19 @@ async index() {
 
 ## 2.1 创建数据库表
 
-1. blog_type
+#### 1. blog_type
 <img width="740"  src="https://user-images.githubusercontent.com/26485327/79175349-0c699f00-7e30-11ea-85da-17928f43259d.png">
 
 
-2. blog_article
+#### 2. blog_article
 <img width="740"  src="https://user-images.githubusercontent.com/26485327/79175352-0e336280-7e30-11ea-9133-0d72ebd76969.png">
 
 
 
 
-## 2.2 controller
+## 2.2 Controller
 
-```javaascript
+```javascript
 class HomeController extends Controller {
   async index() {
     // let result = await this.app.mysql.get('blog_content', {})
@@ -110,9 +110,16 @@ class HomeController extends Controller {
 ```
 
 
+## 2.3 Route
 
 
+```javascript
+module.exports = app => {
+  const { router, controller } = app;
+  router.get('/', controller.home.index);
+  router.get('/getarticlelist', controller.home.getArticleList);
+};
+```
 
 
-
-
+<img width="690" src="https://user-images.githubusercontent.com/26485327/79175641-d7aa1780-7e30-11ea-8c83-064aa91bbdbc.png">
