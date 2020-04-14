@@ -96,7 +96,7 @@ class HomeController extends Controller {
   }
 
   async getArticleList() {
-    let sql = 'SELECT blog_article.type_id as type_id, ' +
+    let sql = 'SELECT blog_article.id as id, ' +
               'blog_article.article_title as article_title, ' + 
               'blog_article.article_intro as article_intro, ' + 
               'blog_article.add_time as add_time, ' + 
