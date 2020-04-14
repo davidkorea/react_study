@@ -168,6 +168,8 @@ class HomeController extends Controller {
 
   async news() {
     let params = this.ctx.params    // 获取动态路由传递参数
+    let id = this.ctx.params.id    // 只获取动态路由传递的参数中的id参数
+
     this.ctx.body = 'news page' + JSON.stringify(params);
   }
 }
