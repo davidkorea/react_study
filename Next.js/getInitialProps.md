@@ -8,7 +8,7 @@ Index.getInitialProps = async ()=>{
 }
 ```
 
-```
+```javascript
 import Head from 'next/head'
 import axios from 'axios'
 import { useState } from 'react';
@@ -46,6 +46,10 @@ Index.getInitialProps = async ()=>{
 export default Index
 
 ```
+
+
+<img width="570" src="https://user-images.githubusercontent.com/26485327/79178511-12637e00-7e38-11ea-8bf2-ddad86487dcc.png">
+
 
 
 # axios & getInitialProps & withRouter
