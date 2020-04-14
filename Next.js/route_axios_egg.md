@@ -17,13 +17,18 @@
 module.exports = app => {
   const { router, controller } = app;
   router.get('/getarticlelist', controller.home.getArticleList);
-  router.get('/getcontentbyid/:id', controller.home.getArticleById);
+  router.get('/getcontentbyid/:id', controller.home.getArticleById);   // url中必须指定博客id
 };
 ```
 
 ## 1.2 Controller
 1. getArticleList API
+<img width="570" src="https://user-images.githubusercontent.com/26485327/79191755-eb1da880-7e59-11ea-83b2-0ed905a9756a.png">
+
 2. getArticleById API
+
+<img width="570" src="https://user-images.githubusercontent.com/26485327/79191965-62533c80-7e5a-11ea-934c-371bfafd6fb9.png">
+
 
 ```javascript
 'use strict';
@@ -45,7 +50,8 @@ class HomeController extends Controller {
   }
 
  async getArticleById(){
-   let id = this.ctx.params.id
+   let id = this.ctx.params.id    // 首先获得列表页面传递来的具体某一博客的id
+
    let sql = 'SELECT blog_article.id as id, ' +
               'blog_article.article_title as article_title, ' + 
               'blog_article.article_intro as article_intro, ' + 
@@ -55,7 +61,7 @@ class HomeController extends Controller {
 
               'blog_article.article_content as article_content ' + 
               'FROM blog_article LEFT JOIN blog_type ON blog_article.type_id = blog_type.type_id ' +
-              `WHERE blog_article.id=${id}`
+              `WHERE blog_article.id=${id}`      // WHERE语句指定id进行查询
               
     const result = await this.app.mysql.query(sql)
     this.ctx.body = {data:result}
@@ -63,12 +69,6 @@ class HomeController extends Controller {
 }
 
 module.exports = HomeController;
-```
-
-
-
-```javascript
-
 ```
 
 
