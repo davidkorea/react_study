@@ -121,9 +121,9 @@ module.exports = app => {
   router.get('/getarticlelist', controller.home.getArticleList);
 };
 ```
+<img width="630"  src="https://user-images.githubusercontent.com/26485327/79191013-3767e900-7e58-11ea-863d-30595acc0eca.png">
 
 
-<img width="690" src="https://user-images.githubusercontent.com/26485327/79175641-d7aa1780-7e30-11ea-8c83-064aa91bbdbc.png">
 
 
 # 3. mysql timestamp
