@@ -104,7 +104,8 @@ class HomeController extends Controller {
               'blog_type.type_name as type_name ' + 
               'FROM blog_article LEFT JOIN blog_type ON blog_article.type_id = blog_type.type_id'
     let result = await this.app.mysql.query(sql)
-    this.ctx.body = result
+ // this.ctx.body = result  // 可以，但是不方便前端通过axios取数据
+    this.ctx.body = {data:result}
   }
 }
 ```
