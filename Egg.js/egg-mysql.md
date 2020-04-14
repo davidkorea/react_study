@@ -142,13 +142,14 @@ mysql> SELECT add_time  FROM blog_article;
 +------------+
 2 rows in set (0.00 sec)
 
-mysql> SELECT FROM_UNIXTIME(add_time,'%Y-%m-%d')  FROM blog_article;
-+------------------------------------+
-| FROM_UNIXTIME(add_time,'%Y-%m-%d') |
-+------------------------------------+
-| 2020-04-14                         |
-| 2020-04-14                         |
-+------------------------------------+
+
+mysql> SELECT FROM_UNIXTIME(add_time,'%Y-%m-%d %H:%i:%s')  FROM blog_article;
++---------------------------------------------+
+| FROM_UNIXTIME(add_time,'%Y-%m-%d %H:%i:%s') |
++---------------------------------------------+
+| 2020-04-14 10:52:41                         |
+| 2020-04-14 10:53:19                         |
++---------------------------------------------+
 2 rows in set (0.00 sec)
 ```
 
