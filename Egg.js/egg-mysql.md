@@ -2,7 +2,7 @@
 
 - [[NPM]egg-mysql](https://www.npmjs.com/package/egg-mysql)
 
-
+# 1. Get started
 1. `cnpm install --save egg-mysql`
 2. `config/plugin.js`
 ```jaavascript
@@ -69,3 +69,50 @@ async index() {
 ```
 
 <img width="360" src="https://user-images.githubusercontent.com/26485327/79130041-e7960d00-7dd8-11ea-8bd8-04857b26ef9e.png">
+
+
+
+# 2. Demo
+
+## 2.1 创建数据库表
+
+1. blog_type
+<img width="740"  src="https://user-images.githubusercontent.com/26485327/79175349-0c699f00-7e30-11ea-85da-17928f43259d.png">
+
+
+2. blog_article
+<img width="740"  src="https://user-images.githubusercontent.com/26485327/79175352-0e336280-7e30-11ea-9133-0d72ebd76969.png">
+
+
+
+
+## 2.2 controller
+
+```javaascript
+class HomeController extends Controller {
+  async index() {
+    // let result = await this.app.mysql.get('blog_content', {})
+    this.ctx.body = 'hi'
+  }
+
+  async getArticleList() {
+    let sql = 'SELECT blog_article.type_id as type_id, ' +
+              'blog_article.article_title as article_title, ' + 
+              'blog_article.article_intro as article_intro, ' + 
+              'blog_article.add_time as add_time, ' + 
+              'blog_article.view_count as view_count, ' + 
+              'blog_type.type_name as type_name ' + 
+              'FROM blog_article LEFT JOIN blog_type ON blog_article.type_id = blog_type.type_id'
+    let result = await this.app.mysql.query(sql)
+    this.ctx.body = result
+  }
+}
+```
+
+
+
+
+
+
+
+
