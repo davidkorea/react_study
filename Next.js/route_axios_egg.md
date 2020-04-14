@@ -8,7 +8,8 @@
 - 博客场景，首页请求api，显示博客的简介列表，点击每篇博客的标题，跳转至详情页面
 - 详情界面根据首页传递来的博客id，再根据具体博客id其请求对应id的博客全部内容
 
-# 1. Egg数据接口设计，查询数据库
+# 1. Egg请求接口设计，mySQL查询
+
 1. 博客列表请求api，`getArticleList`
 2. 博客内容详情api，`getArticleById`
 
@@ -82,10 +83,83 @@ module.exports = HomeController;
 
 
 # 2. Next前端，路由传值与请求
-## 2.1 路由传值
 
-## 2.2 发起请求
+## 2.1 列表页面
+```jaavascript
+import Head from 'next/head'
+import axios from 'axios'
+import { useState } from 'react';
+import Link from 'next/link'
 
+
+function Index(data){   // 传递从下面getInitialProps中返回的数据
+  console.log('data: ',data.data);
+  const [list, setList] = useState(data.data);
+
+  return (
+    <div>
+      <div>index page</div>
+      <div>
+        {
+          list.map((v,i)=>{
+            return (
+                <li key={i}>
+                  <ul>{v.id}</ul>
+                  <ul>{v.add_time}</ul>
+                  <ul>
+                    <Link href={{pathname:'/detail',query:{id:v.id}}}>
+                      <a>                           // 使用Link传递查询参数?id=
+                        {v.article_title}
+                      </a>
+                    </Link>
+                  </ul>
+                  <ul>{v.article_intro}</ul>
+                </li>
+            )
+          })
+        }
+      </div>
+    </div>
+  )
+}
+
+Index.getInitialProps = async ()=>{
+  const response = await axios('http://127.0.0.1:7001/getarticlelist')
+  const data = await response.data  // .data为axios的固定使用
+  return data       // 此处返回数据可以被上面的函数使用
+}
+
+export default Index
+```
+<img width="570"  src="https://user-images.githubusercontent.com/26485327/79192559-85cab700-7e5b-11ea-91cf-ade465a99b02.png">
+
+## 2.2 详情页面
+```javascript
+import axios from 'axios'
+
+function Detail(initprops){  // 传递从下面getInitialProps中返回的数据
+    console.log('initprops: ',initprops);
+    
+    return (
+        <div className="detail">detail
+            <div>{initprops.data[0].article_content}</div>
+        </div>
+    )
+}
+
+Detail.getInitialProps = async(context)=>{  // context为之前页面传递来的上下文，包含url查询参数
+    console.log('context: ',context);
+    
+    let id = context.query.id
+    const response = await axios(`http://127.0.0.1:7001/getcontentbyid/${id}`)   
+    const data = await response.data 
+    return data     // 此处返回数据可以被上面的函数使用
+}
+
+export default withRouter(Detail)
+```
+
+<img width="680" src="https://user-images.githubusercontent.com/26485327/79192916-30db7080-7e5c-11ea-8095-b4c0f48d9c58.png">
 
 
 
