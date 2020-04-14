@@ -1,3 +1,14 @@
+- 因为sync本身就会返回一个Promise对象，因此再sync路面无需再次创建promise
+```javascript
+Index.getInitialProps = async ()=>{
+  const response = await axios('http://127.0.0.1:7001/getarticlelist')
+  const data = await response.data
+  // console.log(data);
+  return data
+}
+```
+
+
 
 
 # axios & getInitialProps & withRouter
