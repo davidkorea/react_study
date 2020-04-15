@@ -12,7 +12,7 @@
 ```javascript
 function Home(propsData){     // 从下面getInitialProps获得的数据，无需解包，直接传入使用
 
-  console.log('propsData: ',propsData);
+  console.log('propsData: ',propsData);  // show in chrome
   const [blogList, setBlogList] = useState(propsData.data)   // 获得getInitialProps传入的数据
 
   return (
@@ -29,7 +29,7 @@ function Home(propsData){     // 从下面getInitialProps获得的数据，无�
 Home.getInitialProps = async()=>{
   let response = await axios('http://127.0.0.1:7001/default/getbloglist')
   let data = await response.data
-  console.log('propsData: ',data);
+  console.log('propsData: ',data);  // show in CLI not in chrome
   
   return data
 }
