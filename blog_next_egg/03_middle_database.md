@@ -29,7 +29,7 @@
 
 # 2. API实现
 
-## 2.1 获取文章列表
+## 2.1 获取文章列表API
 
 - `http://127.0.0.1:7001/default/getbloglist`
 
@@ -79,6 +79,7 @@ module.exports = app => {
 
 
 
+## 2.2 获取文章详情API
 
 
 
