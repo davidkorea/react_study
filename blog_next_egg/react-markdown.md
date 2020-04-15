@@ -14,7 +14,27 @@
 ```javascript
 import ReactMarkdown from 'react-markdown'
 import MarkdownNav from 'markdown-navbar'
+import 'markdown-navbar/dist/narbar.css'
+import { Affix } from 'antd'
 
 
 
+let text = ' # P01:课程介绍和环境搭建\n - hi \n -hey \n' 
+    
+<div className="content">
+    <ReactMarkdown
+        source={text}
+        escapeHtml={false}
+    ></ReactMarkdown>
+</div>
+
+<Affix offsetTop={1}>
+  <div className="navbar">
+      <div className="nav-title">Chapter</div>
+      <MarkdownNav
+          className="nav-item"
+          source={text}
+      ></MarkdownNav>
+  </div>
+</Affix>
 ```
