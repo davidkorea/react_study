@@ -61,7 +61,6 @@ module.exports = app => {
 - app/controller/default/home.js
 ```javascript
 'use strict';
-
 const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
@@ -69,7 +68,6 @@ class HomeController extends Controller {
     this.ctx.body = "api test"
   }
 }
-
 module.exports = HomeController;
 ```
 
@@ -85,15 +83,13 @@ module.exports = HomeController;
 1. `cnpm install --save egg-mysql`
 2. `config/plugin.js`
 ```javascript
-'use strict';
-
 exports.mysql = {
   enable: true,
   package: 'egg-mysql'
 }
 ```
  
-3. `config/config.fefault.js`
+3. `config/config.default.js`
 
 ```javascript
 module.exports = appInfo => {
