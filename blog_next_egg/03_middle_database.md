@@ -4,7 +4,7 @@
 # 1. db design
 
 #### table `blog_type`
-|field|type|key|
+|field|type|note|
 |-|-|-|
 |id|int|PK, ↑|
 |type_name|char|`video`,`life`|
@@ -14,11 +14,12 @@
 
 #### table `blog_article`
 
-|field|type|key|
+|field|type|note|
 |-|-|-|
 |id|int|PK, ↑|
 |article_title|char||
 |article_intro|text||
 |article_content|text||
+|article_type_id|int|同上表`type_id`，用于LEFT JOIN|
 |add_time|int|`unix timestamp`|
 |view_count|int||
