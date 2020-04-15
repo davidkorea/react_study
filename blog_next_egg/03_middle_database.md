@@ -114,6 +114,7 @@ module.exports = app => {
   router.get('/default', controller.default.home.index);
   router.get('/default/getbloglist', controller.default.home.getBlogList);
   router.get('/default/getblogdetailbyid/:id', controller.default.home.getBlogDetailById);
+                     // 匹配url时需要执行参数id
 };
 ```
 
