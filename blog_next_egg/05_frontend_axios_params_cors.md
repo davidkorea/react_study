@@ -5,6 +5,9 @@
 - [egg-cors](https://github.com/davidkorea/react_study/blob/master/Egg.js/egg-cors.md)
 
 
+![Apr-15-2020 14-41-53](https://user-images.githubusercontent.com/26485327/79306159-52555e80-7f27-11ea-83a8-c9401113da31.gif)
+
+
 # 1. 前端页面Link路由传参
 
 #### index.html
