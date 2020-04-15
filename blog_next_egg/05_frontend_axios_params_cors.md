@@ -1,10 +1,16 @@
 
 # 前端跨页面url传参，请求api数据，CORS
 
+- [[综合] next前端请求egg接口，获取mysql数据并展示](https://github.com/davidkorea/react_study/blob/master/Next.js/route_axios_egg.md)
+- [egg-cors](https://github.com/davidkorea/react_study/blob/master/Egg.js/egg-cors.md)
+
 
 # 1. 前端页面Link路由传参
 
 #### index.html
+
+- 通过Link绑定超链接，并传递路由参数
+
 ```javascript
 import Link from 'next/link'
 
@@ -84,9 +90,29 @@ Detail.getInitialProps = async(context)=>{
 
 export default Detail
 ```
+<img width="1428" src="https://user-images.githubusercontent.com/26485327/79304734-91ce7b80-7f24-11ea-90a5-fd3c5581ade7.png">
 
 
-# 2. CORS
+# 2. CORS - `egg-cors` Plugin
 
-
-
+1. `cnpm install --save egg-cors`
+2. `config/plugin.js`
+```javascript
+exports.cors = {
+  enable: true,
+  package: 'egg-cors',
+};
+```
+3. `config/config.default.js`
+```javascript
+config.security = {
+  scrf: {
+    enable: false
+  },
+  domainWhiteList:['*']
+};
+config.cors = {
+  origin: '*',
+  allowMethods: 'GET,PUT,HEAD,UPDATE,DELETE,PATCH,OPTIONS'
+};
+```
