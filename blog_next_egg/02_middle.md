@@ -29,10 +29,45 @@
 ```
 /app
   /controller
-     /defaualt
-     /admin
+     /defaualt     // frontend controller
+        home.js
+     /admin        // backend controller
+        home.js
 ```
 
+## 2.3 API实现
+#### 1. Route
+- app/router.js
+```javascript
+module.exports = app => {
+  const { router, controller } = app;       // 无需默认路径时，可删除此2行
+  router.get('/', controller.home.index);   // 默认路径依然可以访问，删除也可以
+  
+  require('./route/default')(app)           // 引入子路由文件 
+};
+```
+- app/route/default.js
+```javascript
+module.exports = app => {
+  const { router, controller } = app;
+  router.get('/default', controller.default.home.index);   // 设置api url为hostname:7001/default
+};
+```
+#### 2. Controller
+- app/controller/default/home.js
+```javascript
+'use strict';
+
+const Controller = require('egg').Controller;
+
+class HomeController extends Controller {
+  async index() {
+    this.ctx.body = "api test"
+  }
+}
+
+module.exports = HomeController;
+```
 
 
 
