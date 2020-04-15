@@ -81,13 +81,43 @@ module.exports = app => {
 
 ## 2.2 获取文章详情API
 
+- `http://127.0.0.1:7001/default/getblogdetailbyid`
 
 
+#### controller
+- app/controlller/default/home.js
+
+```javascript
+async getBlogDetailById() {
+  let id = this.ctx.params.id       // 从url中获取文章id
+  let sql = "SELECT blog_article.id as id, " +
+            "blog_article.article_title as article_title, " +
+            "blog_article.article_intro as article_intro, " +
+            "blog_article.article_content as article_content, " +
+            "FROM_UNIXTIME(blog_article.add_time, '%Y-%m-%d %H:%i:%s') as add_time, " +
+            "blog_article.view_count as view_count, " +
+            "blog_type.type_name as type_name " +
+            "FROM blog_article LEFT JOIN blog_type ON blog_article.article_type_id = blog_type.type_id " +
+            "WHERE blog_article.id = " + id    // 通过文章id获取记录
+
+  let result = await this.app.mysql.query(sql)
+  this.ctx.body = {data:result};
+}
+```
 
 
+#### route
+- app/route/default.js
+```javascript
+module.exports = app => {
+  const { router, controller } = app;
+  router.get('/default', controller.default.home.index);
+  router.get('/default/getbloglist', controller.default.home.getBlogList);
+  router.get('/default/getblogdetailbyid/:id', controller.default.home.getBlogDetailById);
+};
+```
 
-
-
+<img width="1253"  src="https://user-images.githubusercontent.com/26485327/79302795-eb807700-7f1f-11ea-9fd7-52552951be72.png">
 
 
 
