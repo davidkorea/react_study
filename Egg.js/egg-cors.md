@@ -24,5 +24,5 @@ config.security = {
 config.cors = {
   origin: '*',
   allowMethods: 'GET,PUT,HEAD,UPDATE,DELETE,PATCH,OPTIONS'
-}
+};
 ```
