@@ -69,7 +69,8 @@ class HomeController extends Controller {
 module.exports = HomeController;
 ```
 
-
+<img width="245"  src="https://user-images.githubusercontent.com/26485327/79297640-4fe80a00-7f11-11ea-9c79-8c96a8aa3081.png">
+<img width="292"  src="https://user-images.githubusercontent.com/26485327/79297644-52e2fa80-7f11-11ea-8dc9-4618c65bc78b.png">
 
 
 
