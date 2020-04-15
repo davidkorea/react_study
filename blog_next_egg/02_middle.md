@@ -1,7 +1,9 @@
 
 
 # Middle - API Service - Egg.js
-
+- get started
+- api deploy
+- mysql plugin
 
 # 1 Egg.js Get Started
 
@@ -10,6 +12,8 @@
 3. `cd api-service-1`
 4. `cnpm install`
 5. `npm run dev`, `http://127.0.0.1:7001/`
+
+-----
 
 # 2. RESTful API
 
@@ -73,13 +77,80 @@ module.exports = HomeController;
 <img width="292"  src="https://user-images.githubusercontent.com/26485327/79297644-52e2fa80-7f11-11ea-8dc9-4618c65bc78b.png">
 
 
+-----
 
 
+# 3. `egg-mysql` plugin
+## 3.1 配置egg-mysql插件
+1. `cnpm install --save egg-mysql`
+2. `config/plugin.js`
+```javascript
+'use strict';
 
+exports.mysql = {
+  enable: true,
+  package: 'egg-mysql'
+}
+```
+ 
+3. `config/config.fefault.js`
 
+```javascript
+/* eslint valid-jsdoc: "off" */
 
+'use strict';
 
+/**
+ * @param {Egg.EggAppInfo} appInfo app info
+ */
+module.exports = appInfo => {
+  /**
+   * built-in config
+   * @type {Egg.EggAppConfig}
+   **/
+  const config = exports = {};
 
+  // use for cookie sign key, should change to your own and keep security
+  config.keys = appInfo.name + '_1586922076183_5926';
+
+  // add your middleware config here
+  config.middleware = [];
+
+  // add your user config here
+  const userConfig = {
+    // myAppName: 'egg',
+  };
+
+  // database configuration
+  config.mysql = {
+    client: {
+      host: 'localhost',
+      port: '3306',
+      user: 'root',
+      password: 'root',
+      database: 'egg-db',    
+    },
+    app: true,
+    agent: false,
+  };
+
+  return {
+    ...config,
+    ...userConfig,
+  };
+};
+```
+
+## 3.2 测试数据库查询
+- app/controller/home.js
+```javascript
+class HomeController extends Controller {
+  async index() {
+    let result = await this.app.mysql.get("blog_type",{})
+    this.ctx.body = 'hi, egg ' + JSON.stringify(result);
+  }
+}
+```
 
 
 
