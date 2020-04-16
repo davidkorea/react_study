@@ -16,7 +16,7 @@
 # 1. [Middle] Database & API design
 
 1. 创建出菜单类别表
-2. 创建根据文章类别查询的API接口
+2. 创建根据文章类别查询的API接口，`getMenuList`, `getBlogByTypeId`
 
 ## 1.1 创建`blog_menu`表
 
@@ -27,8 +27,39 @@
 |menu_id|int|`1`,`2`，用于页面跳转传递参数|
 |menu_icon|varchar|菜单导航按钮图标，无法使用|
 
+## 1.2 `getMenuList` API
+### Controller
+- `app/controller/default/home.js`
 
-## 1.2 `getBlogByTypeId`API
+```javascript
+async getMenuList(){
+  let result = await this.app.mysql.select('blog_menu') // 使用select将全部数据返回为一个json对象
+  this.ctx.body = {data: result}
+}
+```
+
+### Route
+- `app/route/default.js`
+
+```javascript
+module.exports = app => {
+  const { router, controller } = app;
+  router.get('/default', controller.default.home.index);
+  router.get('/default/getbloglist', controller.default.home.getBlogList);
+  router.get('/default/getblogdetailbyid/:id', controller.default.home.getBlogDetailById);
+  
+  router.get('/default/getmenulist', controller.default.home.getMenuList);
+};
+```
+
+
+### 测试API
+- `http://127.0.0.1:7001/default/getmenulist`
+  - 返回为一个对象，通过`对象.data`的方式，将全部数据的数据取出，用于循环渲染页面
+<img width="367"  src="https://user-images.githubusercontent.com/26485327/79405488-1b368a00-7fc7-11ea-9d5a-967e467b8c86.png">
+
+
+## 1.3 `getBlogByTypeId` API
 
 ### Controller
 
@@ -84,12 +115,28 @@ async getBlogByTypeId(){
 
 ## 2.1 `Header`组件数据库动态获取菜单类比
 
-> 请求数据的两种方式
-> #### 1. next.js `getInitialProps`，用于页面加载时，因此对于url变化后进入一个新的页面，请求数据需要使用getInitialProps
-> #### 2. react `useEffect`，用于组件加载时，而页面上局部组件加载时请求数据，使用useEffect
+**请求数据的两种方式**
+##### 1. next.js `getInitialProps`，用于页面加载时，因此对于url变化后进入一个新的页面，请求数据需要使用getInitialProps
+##### 2. react `useEffect`，用于组件加载时，而页面上局部组件加载时请求数据，使用useEffect
 
+对于Header组件请求数据库，需要使用react hooks中的useEffect
 
+```javascript
+import axios from 'axios'
+import { useState, useEffect } from 'react'
 
+const [menuList, setMenuList] = useState([])
+
+useEffect(()=>{
+    const fetchData = async ()=>{
+        const response = await axios(API.getMenuList)
+        const data = await response.data
+        // console.log(data.data);
+        setMenuList(data.data)
+    }
+    fetchData()
+},[])
+```
 
 
 
