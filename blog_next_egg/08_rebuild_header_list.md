@@ -24,9 +24,8 @@
 |-|-|-|
 |id|int|PK, ↑|
 |menu_name|varchar|`Video`,`Life` 对应文章类别|
-|menu_id|int|`1`,`2`，用于数据库搜索|
+|menu_id|int|`1`,`2`，用于页面跳转传递参数|
 |menu_icon|varchar|菜单导航按钮图标，无法使用|
-|menu_path|int|`video`,`life`|
 
 
 ## 1.2 `getBlogByTypeId`API
@@ -81,6 +80,29 @@ async getBlogByTypeId(){
 
 
 # 2. [Frontend] 菜单导航 + 类别页面
+
+
+## 2.1 `Header`组件数据库动态获取菜单类比
+
+> 请求数据的两种方式
+> #### 1. next.js `getInitialProps`，用于页面加载时，因此对于url变化后进入一个新的页面，请求数据需要使用getInitialProps
+> #### 2. react `useEffect`，用于组件加载时，而页面上局部组件加载时请求数据，使用useEffect
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
