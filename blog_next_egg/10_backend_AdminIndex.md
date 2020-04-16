@@ -4,6 +4,11 @@
 - 使用antd Layout模板 [Layout布局](https://ant.design/components/layout-cn/)
 - 将原有class组件改成function组件
 
+
+<img width="765" src="https://user-images.githubusercontent.com/26485327/79425395-38ce1880-7ff4-11ea-8e66-a4875ded1b5c.png">
+
+
+# 1. AdminIndex页面
 ```javascript
 // AdminIndex.js
 import React, { useState } from 'react'
@@ -79,12 +84,10 @@ function AdminIndex(){
       </Layout>
     );
 }
-
-
 export default AdminIndex
 ```
 ```css
-// // AdminIndex.css
+// AdminIndex.css
 .logo {
     height: 32px;
     background: rgba(255, 255, 255, 0.2);
@@ -96,7 +99,21 @@ export default AdminIndex
 }
 ```
 
+# 2. 路由
 
+```javascript
+// Main.js
+function Main(){
+    return (
+        <div className="main">
+            <Router>
+            <Route path="/login" exact component={Login}></Route>
+            <Route path="/index" exact component={AdminIndex}></Route>
+            </Router>
+        </div>
+    )
+}
+```
 
 
 
