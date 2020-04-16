@@ -8,6 +8,7 @@
 ## 1. 创建config
 
 1. 在前端项目的根目录下，创建condif文件夹，用于统一管理项目的配置文件，当然也包括API配置文件
+
 2. 创建`api.js`
 ```javascript
 const baseUrl = 'http://127.0.0.1:7001'
@@ -17,11 +18,14 @@ const API = {
     getBlogDetailById: baseUrl + '/default/getblogdetailbyid/',
     getMenuList: baseUrl + '/default/getmenulist',
     getBlogByTypeId: baseUrl + '/default/getblogbytypeid/'
+                     // url后面需要添加id的，需要在此处以斜线/结尾
 }
 
 export default API
 ```
+
 3. 需要API的文件引入该配置文件
+
 ```javascript
 import API from '../config/api'
 
