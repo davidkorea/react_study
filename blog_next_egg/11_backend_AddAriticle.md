@@ -6,12 +6,32 @@
 2. AdminIndex页面路由该页面，将`http://localhost:3001/index`路由给AddArticle页面
 3. AddArticle页面布局，markdown展示
 
+# 1. AdminIndex配置路由
 
-# 1. AddArticle页面布局
+```javascript
+import {Route} from 'react-router-dom'
+import AddArticle from './AddArticle'
 
-![E00703B0-F237-4114-9337-247BE13045F7](https://user-images.githubusercontent.com/26485327/79455063-e0f8d700-801e-11ea-83a5-37d40159a24c.jpeg)
+<Content style={{ margin: '0 16px' }}>
+    <Breadcrumb style={{ margin: '16px 0' }}>
+      <Breadcrumb.Item>Console</Breadcrumb.Item>
+      <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
+    </Breadcrumb>
 
-<img width="1440"  src="https://user-images.githubusercontent.com/26485327/79455317-4351d780-801f-11ea-9b29-49bfcb78ba5a.png">
+    <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
+      <div>
+        <Route path="/index" exact component={AddArticle}></Route>  // 配置路由
+      </div>
+    </div>
+</Content>
+```
+
+
+# 2. AddArticle页面布局
+
+<img width="500" src="https://user-images.githubusercontent.com/26485327/79455063-e0f8d700-801e-11ea-83a5-37d40159a24c.jpeg">
+
+<img width="1440" src="https://user-images.githubusercontent.com/26485327/79455317-4351d780-801f-11ea-9b29-49bfcb78ba5a.png">
 
 
 ```javascript
