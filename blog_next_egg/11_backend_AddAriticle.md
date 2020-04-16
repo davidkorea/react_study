@@ -8,6 +8,9 @@
 
 
 # 1. AddArticle页面布局
+
+![E00703B0-F237-4114-9337-247BE13045F7](https://user-images.githubusercontent.com/26485327/79455063-e0f8d700-801e-11ea-83a5-37d40159a24c.jpeg)
+
 ```javascript
 import React,{useState} from 'react'
 import marked from 'marked'
