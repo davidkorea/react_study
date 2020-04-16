@@ -7,7 +7,7 @@
 |field|type|note|
 |-|-|-|
 |id|int|PK, ↑|
-|type_name|char|`video`,`life`|
+|type_name|varchar|`video`,`life`|
 |type_id|int|`1`,`2`|
 
 
@@ -17,7 +17,7 @@
 |field|type|note|
 |-|-|-|
 |id|int|PK, ↑|
-|article_title|char||
+|article_title|varchar||
 |article_intro|text||
 |article_content|text||
 |article_type_id|int|同上表`type_id`，用于LEFT JOIN|
