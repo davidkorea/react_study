@@ -220,7 +220,7 @@ export default ListPage
 
 - `http://localhost:3000/list?type=1`
 
-<img width="985" src="https://user-images.githubusercontent.com/26485327/79406661-4373b800-7fca-11ea-8f23-c688b7fd4ae1.png">
+<img width="985" src="https://user-images.githubusercontent.com/26485327/79406872-b8df8880-7fca-11ea-9991-bd662c2a5ac2.png">
 
 - `http://localhost:3000/list?type=2`
 
