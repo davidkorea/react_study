@@ -219,11 +219,13 @@ function AddArticle(){
 
 export default AddArticle
 ```
+
 ```css
 .content-preview {
-    height: 100%;
+    height: 685px;
     padding: 10px;
     background-color: #f8f8f8;
+    overflow: scroll;
 }
 
 .intro-preview {
