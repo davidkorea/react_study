@@ -1,6 +1,6 @@
 
 
-# 重新构建前端页面（菜单导航Header + 菜单页面ListPage） 
+# 重新构建前端页面（菜单导航Header + 类别页面ListPage） 
 # Frontend + Middle API
 
 博客的架构为
@@ -13,7 +13,7 @@
 
 另外，菜单导航按钮需要在数据库中取出，以方便添加和更改，而不是写死在页面，需要在创建一个数据库table `blog_menu`
 
-# 1. Database & API design
+# 1. [Middle] Database & API design
 
 1. 创建出菜单类别表
 2. 创建根据文章类别查询的API接口
@@ -31,9 +31,10 @@
 
 ## 1.2 `getBlogByTypeId`API
 
-#### Controller
+### Controller
 
 - `app/controller/default/home.js`
+
 ```javascript
 async getBlogByTypeId(){
   let id = this.ctx.params.id       // 获取url中的动态参数.../id/1
@@ -53,9 +54,10 @@ async getBlogByTypeId(){
 }
 ```
 
-#### Route
+### Route
 
 - `app/route/default.js`
+
 ```diff
   module.exports = app => {
     const { router, controller } = app;
@@ -67,11 +69,18 @@ async getBlogByTypeId(){
   };
 ```
 
+### 测试接口
+
+- `http://127.0.0.1:7001/default/getblogbytypeid/1`
+<img width="1429"  src="https://user-images.githubusercontent.com/26485327/79404516-77e47580-7fc4-11ea-8fe6-a63453f28e96.png">
+
+- `http://127.0.0.1:7001/default/getblogbytypeid/2`
+
+<img width="1429" src="https://user-images.githubusercontent.com/26485327/79404531-83d03780-7fc4-11ea-924c-0ec2b2e30195.png">
 
 
 
-
-
+# 2. [Frontend] 菜单导航 + 类别页面
 
 
 
