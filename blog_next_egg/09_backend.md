@@ -45,11 +45,13 @@ function App() {
 export default App;
 ```
 
+#### 4. `cnpm install --save @ant-design/icons`，安装antd图标库
+
 
 # 2. Route
 
 #### 1. 创建目录`src/Pages/`
-#### 2. 创建文件`src/Pages/Main.js`，用于方式主路由
+#### 2. 创建文件`src/Pages/Main.js`，用于配置主路由
 ```javascript
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
@@ -90,13 +92,83 @@ import Main from './Pages/Main'
 ReactDOM.render(<Main />, document.getElementById('root'));
 ```
 
+#### 5. 访问`http://localhost:3001/login`，页面路由配置成功
 
 
 
 
+# 3. Login静态页面
 
+```javascript
+import React, { useState } from 'react'
+import '../Static/css/Login.css'
+import {Button,Card,Input,Spin} from 'antd'
+import {UserOutlined,LockOutlined} from '@ant-design/icons'
 
+function Login(){
 
+    const [userName, setUserName] = useState('')
+    const [paassword, setPaassword] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
+    const handleLogin = ()=>{
+        setIsLoading(true)
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 1000);
+    }
+    return (
+        <div className="login-div">
+            <Spin tip="Loading..." spinning={isLoading}>
+                <Card title="System Login" bordered={true} style={{width:'400px'}} className="card">
+                    <Input className='input-item'
+                        id="username" size="large"
+                        placeholder="password"
+                        prefix={<UserOutlined/>}
+                        onChange={e=>setUserName(e.target.value)}
+                    ></Input>
+                    <Input.Password className='input-item'
+                        id="password" size="large"
+                        placeholder="username"
+                        prefix={<LockOutlined/>}
+                        onChange={e=>setPaassword(e.target.value)}
+                    ></Input.Password>
+                    <Button className='btn' type="primary" size="large" onClick={handleLogin}>Login</Button>
+                </Card>
+
+            </Spin>
+        </div>
+    )
+}
+
+export default Login
+```
+```css
+body {
+    background-color: aliceblue;
+}
+
+.login-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.card {
+    box-shadow: 3px 3px 5px lightgray;
+}
+
+.input-item {
+    margin-top: 10px;
+}
+
+.btn {
+    margin-top: 20px;
+    width: 100%;
+}
+```
+
+<img width="463" src="https://user-images.githubusercontent.com/26485327/79421920-6ca63f80-7fee-11ea-9ec9-c43a1edddb42.png">
 
 
 
