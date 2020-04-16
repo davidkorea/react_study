@@ -112,6 +112,8 @@ return (
 1. 页面使用marked渲染markdown
 2. css 配合渲染后的代码块样式
 
+<img width="1440" src="https://user-images.githubusercontent.com/26485327/79456755-9dec3300-8021-11ea-8885-d5f27e5f4842.png">
+
 
 ```javascript
 import marked from 'marked'
