@@ -112,14 +112,14 @@ async getBlogByTypeId(){
 
 # 2. [Frontend] 菜单导航 + 类别页面
 
-
-## 2.1 `Header`组件数据库动态获取菜单类别
-
 **请求数据的两种方式**
 ##### 1. next.js `getInitialProps`，用于页面加载时，因此对于url变化后进入一个新的页面，请求数据需要使用getInitialProps
 ##### 2. react `useEffect`，用于组件加载时，而页面上局部组件加载时请求数据，使用useEffect
 
-对于Header组件请求数据库，需要使用react hooks中的useEffect
+## 2.1 `Header`组件数据库动态获取菜单类别
+
+- 对于Header组件请求数据库，需要使用react hooks中的useEffect
+- 使用`getMenuList` API
 
 ```javascript
 import{ Menu } from 'antd'
@@ -168,9 +168,10 @@ useEffect(()=>{
 
 ## 2.2 根据菜单按钮传递的参数，到list页面请求该参数
 
+- 对于页面的数据请求，使用getInitialProps
+- 使用`getBlogByTypeId` API
 
 ```javascript
-
 
 const ListPage = (propsData) => {
 
@@ -215,7 +216,15 @@ ListPage.getInitialProps = async(context)=>{  // 从之前页面获取上下文
 export default ListPage
 ```
 
+## 2.3 测试页面
 
+- `http://localhost:3000/list?type=1`
+
+<img width="985" src="https://user-images.githubusercontent.com/26485327/79406661-4373b800-7fca-11ea-8f23-c688b7fd4ae1.png">
+
+- `http://localhost:3000/list?type=2`
+
+<img width="985" src="https://user-images.githubusercontent.com/26485327/79406662-44a4e500-7fca-11ea-8875-97990ec9f40f.png">
 
 
 
