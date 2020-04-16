@@ -113,7 +113,7 @@ async getBlogByTypeId(){
 # 2. [Frontend] 菜单导航 + 类别页面
 
 
-## 2.1 `Header`组件数据库动态获取菜单类比
+## 2.1 `Header`组件数据库动态获取菜单类别
 
 **请求数据的两种方式**
 ##### 1. next.js `getInitialProps`，用于页面加载时，因此对于url变化后进入一个新的页面，请求数据需要使用getInitialProps
@@ -122,28 +122,98 @@ async getBlogByTypeId(){
 对于Header组件请求数据库，需要使用react hooks中的useEffect
 
 ```javascript
+import{ Menu } from 'antd'
+import Link from 'next/link'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 
 const [menuList, setMenuList] = useState([])
 
 useEffect(()=>{
-    const fetchData = async ()=>{
+    const fetchData = async ()=>{ 
+        // useEffect中不能直接使用await axios进行请求，需要外层先有一个async函数包裹        
         const response = await axios(API.getMenuList)
         const data = await response.data
         // console.log(data.data);
         setMenuList(data.data)
     }
-    fetchData()
+    fetchData()   // 调用该异步函数
 },[])
+
+<Menu mode="horizontal">
+    <Menu.Item className='item' key="home">    // 首页按钮单独拿出来，不需要查询数据库
+        <Link href="/">
+            <a> <HomeOutlined />Home</a>
+        </Link>
+    </Menu.Item>
+    
+    {
+      menuList.map((v,i)=>{
+          return (
+              <Menu.Item className='item' key={v.menu_name}>
+                  <Link  href={{pathname:'list',query:{type:v.menu_id}}}>
+                      <a>{v.menu_name}</a>    // 跳转到list页面，携带参数type(菜单d)
+                  </Link>
+              </Menu.Item>
+          )
+      })
+    }
+</Menu>
 ```
 
+- Video菜单按钮对应 `http://localhost:3000/list?type=1`
+- Life菜单按钮对应  `http://localhost:3000/list?type=2`
 
 
 
+## 2.2 根据菜单按钮传递的参数，到list页面请求该参数
 
 
+```javascript
 
+
+const ListPage = (propsData) => {
+
+  const blogList = propsData.data   // 使用变量，而不是用useState接收也可以
+  // const [blogList, setBlogList] = useState(propsData.data);
+
+  return (
+    <List 
+      header={<div>Latest blogs</div>}
+      itemLayout="vertical"
+      dataSource={blogList}
+      renderItem={item=>(
+        <List.Item>
+        
+          <div className="item-title">    // 用于文章详情页面的跳转
+            <Link href={{pathname:'detail',query:{id:item.id}}}>
+              <a>{item.article_title}</a>
+            </Link>
+          </div>
+          
+          <div className="item-icons">
+            <span className='icon'><CalendarOutlined /> {item.add_time}</span>
+            <span className='icon'><FolderOutlined /> {item.type_name}</span>
+            <span className='icon'><FireOutlined/> {item.view_count} views</span>
+          </div>
+          
+          <div className="item-content">{item.article_intro}</div>
+          
+        </List.Item>
+      )}
+    />
+  ）
+}
+
+ListPage.getInitialProps = async(context)=>{  // 从之前页面获取上下文
+  let typeId = context.query.type
+  let response = await axios(API.getBlogByTypeId + typeId)
+  let data = await response.data  
+  return data
+}
+
+export default ListPage
+```
 
 
 
