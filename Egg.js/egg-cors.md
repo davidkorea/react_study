@@ -25,6 +25,6 @@ config.security = {
 };
 config.cors = {
   origin: '*',   // 注释掉此字段，则可以允许所有域名进行跨域访问！！！！
-  allowMethods: 'GET,PUT,HEAD,UPDATE,DELETE,PATCH,OPTIONS'
+  allowMethods: 'POST,GET,PUT,HEAD,UPDATE,DELETE,PATCH,OPTIONS'
 };
 ```
