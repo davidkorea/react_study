@@ -85,16 +85,25 @@ function AddArticle(props){
         }).then(res=>{
             if(res.data.data == 'no login'){  // egg app/middle/adminAuth中设置
                 localStorage.removeItem('openId')
-                props.history.push('/')      // 检测没有登录，跳转至login页面
+                props.history.push('/')       // 检测没有登录，跳转至login页面
             }else{
                 setBlogType(res.data.data)
             }
         })
     }
 
+    const handleTypeSelected = (value)=>{    // 需要将选择的类别转换为id，存储数据库
+        if(value='Video'){
+            setBlogTypeSelected(1)
+        }else if(value='Life'){
+            setBlogTypeSelected(2)
+        }
+    }
+
     return (
         <Select defaultValue={blogTypeSelected} 
-            onChange={(value)=>setBlogTypeSelected(value)}  
+            onChange={(value)=>handleTypeSelected(value)}  
+            // onChange={(value)=>setBlogTypeSelected(value)}  由于数据库需要type_id字段，需要数字
             // 参数value由组件自动传入，就是下面Option中的value
             size="large"
         >
