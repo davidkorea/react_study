@@ -299,6 +299,8 @@ const handleSave = ()=>{
 }
 ```
 
+<img width="1155"  src="https://user-images.githubusercontent.com/26485327/79571528-e7a24f80-80ed-11ea-8ece-33167826b9d9.png">
+
 
 # 3. 更新已添加文章
 
@@ -420,4 +422,17 @@ async updateArticle(){
         }
     }
 ```
+
+- 后台管理系统
+<img width="1154" src="https://user-images.githubusercontent.com/26485327/79571533-ea04a980-80ed-11ea-8d83-0f95042e7df0.png">
+
+- 前台页面
+<img width="949" src="https://user-images.githubusercontent.com/26485327/79571540-ebce6d00-80ed-11ea-9226-87bfa705ca05.png">
+
+
+
+
+
+
+
 
