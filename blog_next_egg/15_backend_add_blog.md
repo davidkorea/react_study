@@ -23,7 +23,7 @@ size="large"></Input>
 ```
 ## 1.2 Date
 
-onChange事件接收2个参数，一个是日期格式，一个是字符串格式
+onChange事件接收2个参数，一个是Moment对象，一个是日期格式字符串2015-04-15格式
 
 ```javascript
 const [addDate, setAddDate] = useState('');
@@ -33,6 +33,23 @@ const [addDate, setAddDate] = useState('');
       size="large">
     </DatePicker>
 </div>
+```
+
+- date
+```
+Moment {_isAMomentObject: true, _isUTC: false, _pf: {…}, _locale: Locale, _d: Fri Apr 17 2020 16:03:17 GMT+0800 (中国标准时间)…}
+  _d: Fri Apr 17 2020 16:03:17 GMT+0800 (中国标准时间) {}
+  _isAMomentObject: true
+  _isUTC: false
+  _isValid: true
+  _locale: Locale {_calendar: {…}, _longDateFormat: {…}, _invalidDate: "Invalid date", _dayOfMonthOrdinalParse: /\d{1,2}(th|st|nd|rd)/, ordinal: ƒ, …}
+  _pf: {empty: false, unusedTokens: Array(0), unusedInput: Array(0), overflow: -2, charsLeftOver: 0, …}
+  __proto__: Object
+```
+
+- datestring
+```
+2020-04-17
 ```
 
 ## 1.3 Intro & Content
