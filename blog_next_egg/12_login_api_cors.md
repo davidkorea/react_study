@@ -65,11 +65,34 @@ class MainController extends Controller{    // 命名MainController和文件名�
 module.exports = MainController
 ```
 
+1. POST方式接收参数需要使用`this.ctx.request.body.参数名`
+2. sql语句拼接，注意使用单引号和双引号配合，将变量转化为使用引号包裹的样式`SELECT user_name from admin_user WHERE user_name='admin' AND password='11111'`
+3. 执行sql查询后的结果要使用await来接收，否则即使输入用户名和密码正确，也无法成功登录
 
-### Egg Router
 
-1. `app/route/admin` -> **!!! POST !!!**
-2. `app/router.js`
+###  Router
+
+- 子路由配置文件 `app/route/admin.js` -> **!!! POST !!!**
+
+```javascript
+'use strict';
+
+module.exports = app => {
+  const { router, controller } = app;
+  router.post('/admin/login', controller.admin.main.Login);  // 使用POST
+};
+```
+
+- 主路由入口 `app/router.js`
+
+```javascript
+module.exports = app => {
+  const { router, controller } = app;
+  router.get('/', controller.home.index); 
+  require('./route/default')(app)
+  require('./route/admin')(app)      // 新增
+};
+```
 
 
 
