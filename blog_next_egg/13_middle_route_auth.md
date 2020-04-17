@@ -20,7 +20,7 @@ module.exports = options => {
 
 3. `config/config.defaault.js`, credentials=true
 ```javascript
-  config.cors = {=
+  config.cors = {
     credentials: true,  // 允许cokkie跨域, session时cookie的一种！！！！！
     allowMethods: 'POST,GET,PUT,HEAD,UPDATE,DELETE,PATCH,OPTIONS'
   };
