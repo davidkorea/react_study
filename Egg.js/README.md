@@ -107,8 +107,10 @@ module.exports = HomeController;
 
 
 # 3. 路由传值
-
-### 3.1 URL GET？传值 `this.ctx.query`
+1. GET
+2. POST
+## 3.1 GET
+#### 1 URL GET？传值 `this.ctx.query`
 ```javascript
 // app/controller/home.js
 
@@ -135,7 +137,7 @@ module.exports = HomeController;
 list page{"id":"123","name":"hi"}
 ```
 
-### 3.2 动态传值 `this.ctx.params`
+#### 2 动态传值 `this.ctx.params`
 
 - router
 ```javascript
@@ -181,6 +183,28 @@ module.exports = HomeController;
 news page{"id":"123"}
 ```
 
+## 3.2 POST
+- 浏览器请求参数
+```
+{
+  'user': 'admin',
+  'passwd': '11111'
+}
+```
+- egg controller
+
+```
+async Login(){
+
+  let user = this.ctx.request.body.user
+}
+
+```
+- egg router
+```
+router.post('/admin/login', controller.admin.main.Login);
+
+```
 
 
 # 4. 模板引擎 egg-view-ejs `await this.ctx.render`
