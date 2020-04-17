@@ -308,7 +308,7 @@ const handleSave = ()=>{
 
 ## 3.1 Middle API
 
-- ``
+- POST `http://127.0.0.1:7001/admin/updatearticle`
 
 #### Controller
 1. 获取文章在数据库表中的id
