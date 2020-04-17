@@ -136,6 +136,7 @@ const handleSave = ()=>{
 <Button onClick={handleSave} type="primary" size="large">Save</Button>
 ```
 
+<img width="800" src="https://user-images.githubusercontent.com/26485327/79548423-01c93700-80c8-11ea-94ed-ebfe243af76b.png">
 
 
 
