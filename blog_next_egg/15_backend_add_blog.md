@@ -293,16 +293,131 @@ const handleSave = ()=>{
                 message.error('Add failed')
             }
         })
+    }else{
+      // update current blog
     }
 }
 ```
 
 
+# 3. 更新已添加文章
+
+- 由于上面创建新文章后，没有执行将所有输入的信息清空，所以，可以继续添加或者修改内容，继续保存
+- 为了更新同一文章不会再创建一条新记录，需要获取该文章在数据库表中的id，并根据该id更新记录
 
 
+## 3.1 Middle API
+
+- ``
+
+#### Controller
+1. 获取文章在数据库表中的id
+2. 根据该id，更新该条记录
+```javascript
+async updateArticle(){
+    const currentBlog = this.ctx.request.body   //currentBlog包含insertId
+    const result = await this.app.mysql.update('blog_article',currentBlog)
+    //currentBlog包含insertId，update函数会自动更新数据
+
+    const updaateSuccess = result.affectedRows === 1
+    this.ctx.body = {
+        updaateSuccess: updaateSuccess
+    } 
+}
+```
 
 
+#### Router
+```diff
+  module.exports = app => {
+    const { router, controller } = app;
+    var adminAuth = app.middleware.adminAuth()
+    router.get('/admin', controller.admin.main.Index);
+    router.post('/admin/login', controller.admin.main.Login);
+    router.get('/admin/getblogtype', adminAuth, controller.admin.main.getBlogType);
+    router.post('/admin/addarticle',adminAuth, controller.admin.main.AddArticle);
++   router.post('/admin/updatearticle',adminAuth, controller.admin.main.AddArticle);
+  };
+```
 
 
+## 3.2 Backend
 
+#### Global API setting
+```diff
+  const baseUrl = 'http://127.0.0.1:7001/admin'
+  const API = {
+      login: baseUrl + '/login',
+      getBlogType: baseUrl + '/getblogtype',
+      AddArticle: baseUrl + '/addarticle',
++     updateArticle: baseUrl + '/updatearticle'
+  }
+  export default API
+```
+
+#### AddArticle更新文章逻辑
+```javascript
+    const [blogId, setBlogId] = useState(0)  // insertId
+    const handleSave = ()=>{
+        if(!blogTitle){
+            message.warn('No Title')
+            return false
+        }else if(!blogTypeSelected){
+            message.warn('No Type')
+            return false
+        }else if(!addDate){
+            message.warn('No Date')
+            return false
+        }else if(!blogContent){
+            message.warn('No Content')
+            return false
+        }else if(!blogIntro){
+            message.warn('No Intro')
+            return false
+        }
+
+        let tempBlog = {} // 该对象的每个属性对应 数据库中的字段
+        tempBlog.article_title = blogTitle
+        tempBlog.article_intro = blogIntro
+        tempBlog.article_content = blogContent
+        tempBlog.article_type_id = blogTypeSelected
+        // let time = addDate.replace('-','/') // 把-换成/
+        // addDate: 2020-04-17 17:57:27 无需转换-和/，直接可以被识别
+        tempBlog.add_time = (new Date(addDate).getTime())/1000
+
+        console.log(tempBlog);
+        
+        if(blogId === 0){  // 新增加文章，状态blogId初始值为0
+            tempBlog.view_count = 0
+            axios({
+                method: 'post',
+                url: API.AddArticle,
+                data: tempBlog, 
+                withCredentials: true
+            }).then(res=>{   // 新增请求成功，会得到insertId
+                console.log(res.data);
+                setBlogId(res.data.insertId)
+                if(res.data.insertSuccess){
+                    message.success('Add new blog success')
+                }else{
+                    message.error('Add failed')
+                }
+            })
+        }else{      // 状态blogId不为0，说明不是初始状态，判断为更新已有文章
+            tempBlog.id = blogId   // blogId就是数据库表中该文章的id字段
+            axios({
+                method: 'post',
+                url: API.updateArticle,
+                data: tempBlog,
+                withCredentials: true
+            }).then(res=>{
+                if(res.data.updateSuccess){
+                    message.success('Update success')
+                }else{
+                    message.error('Update failed')
+                }
+            })
+        }
+    }
+```
 
