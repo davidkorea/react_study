@@ -182,7 +182,7 @@ async AddArticle(){
     console.log('sqlresult: ',result);                 //
 
     const insertSuccess = result.affectedRows === 1    // 改变一行表示插入成功
-    const insertId = result.insertId                   // 当前插入条目的id
+    const insertId = result.insertId                   // 当前插入条目的id，就是数据库中表的id字段
 
     console.log('insertSuccess: ',insertSuccess);      //
     console.log('insertId: ', insertId);               //
@@ -211,7 +211,7 @@ tempArticle:  {
 sqlresult:  OkPacket {
   fieldCount: 0,
   affectedRows: 1,
-  insertId: 8,
+  insertId: 8,              // 就是数据库中表的主键id字段
   serverStatus: 2,
   warningCount: 0,
   message: '',
@@ -248,6 +248,7 @@ insertId:  8
 
 ```javascript
 const [blogId, setBlogId] = useState(0)  // 创建状态用于保存中台返回的数据insertId
+                                         // 就是数据库中表的主键id字段
 const handleSave = ()=>{
     if(!blogTitle){
         message.warn('No Title')
