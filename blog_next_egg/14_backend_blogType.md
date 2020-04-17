@@ -53,7 +53,7 @@ export default API
 
 ## 2.2 AddArticle Page
 
-1. 页面加载后，axios请求获取文章类别信息
+### 1. 页面加载后，axios请求获取文章类别信息
 
 ```javascript
 import axios from 'axios'
@@ -64,7 +64,7 @@ function AddArticle(props){
     const [blogType, setBlogType] = useState([]);
     const [blogTypeSelected, setBlogTypeSelected] = useState('Video');
 
-useEffect(()=>{
+    useEffect(()=>{
         getBlogType()
     },[])
 
@@ -76,7 +76,7 @@ useEffect(()=>{
         }).then(res=>{
             if(res.data.data == 'no login'){  // egg app/middle/adminAuth中设置
                 localStorage.removeItem('openId')
-                props.history.push('/')
+                props.history.push('/')      // 检测没有登录，跳转至login页面
             }else{
                 setBlogType(res.data.data)
             }
@@ -84,22 +84,20 @@ useEffect(()=>{
     }
 
     return (
-<Select defaultValue={blogTypeSelected} 
-                                onChange={(value)=>setBlogTypeSelected(value)}  
-                                // value由组件自动传入，就是下面Option中的value
-                                size="large"
-                            >
-                                {
-                                    blogType.map((v,i)=>{
-                                        return(<Option key={i} value={v.id}>{v.type_name}</Option>)
-                                    })
-                                }
-                            </Select>
+        <Select defaultValue={blogTypeSelected} 
+            onChange={(value)=>setBlogTypeSelected(value)}  
+            // 参数value由组件自动传入，就是下面Option中的value
+            size="large"
+        >
+            {
+                blogType.map((v,i)=>{
+                    return(<Option key={i} value={v.id}>{v.type_name}</Option>)
+                })
+            }
+        </Select>
     ）
 }
-
 ```
-
 
 
 
