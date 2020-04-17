@@ -8,9 +8,8 @@
 2. backend， addArticle page
 
 
-# 1. Middle - API
+# 1. Middle - API 路由鉴权
 
-## 1.1 路由鉴权
 ### Controller
 
 - `controller/admin/main.js`
@@ -31,7 +30,17 @@ async getBlogType(){
 +   router.get('/admin/getblogtype', adminAuth, controller.admin.main.getBlogType)  
   };
 ```
+
+### Test API
+
+- Chome已登录博客
 <img width="378"  src="https://user-images.githubusercontent.com/26485327/79539909-cde71500-80b9-11ea-9c0c-cd07af597840.png">
+
+ 
+- Safari未登录博客
+
+<img width="481"  src="https://user-images.githubusercontent.com/26485327/79545126-c841fd00-80c2-11ea-84f4-2d6f4efd7c82.png">
+
 
 
 # 2. Backend
