@@ -94,9 +94,117 @@ module.exports = app => {
 };
 ```
 
+- 由于是POST请求，无法在浏览器直接测试接口
 
 
-# 3. Backend Login page
+
+# 3. Backend
+- Global API config 
+- Login页面
+
+## 3.1 全局统一API配置文件
+- 创建`src/Config`目录
+- 创建`src/Config/api.js`文件
+```javascript
+const baseUrl = 'http://127.0.0.1:7001/admin'
+
+const API = {
+    login: baseUrl + '/login'
+
+}
+
+export default API
+```
+
+## 3.2 Login页面登录逻辑
+
+- 整个登录无需使用form的post方式
+    - 输入变更，同步更新username个password两个状态
+    - axios发起post请求，传递的数据来自用户名和密码的两个状态的值
+    
+```javascript
+import React, { useState } from 'react'
+import '../Static/css/Login.css'
+import {Button,Card,Input,Spin,message} from 'antd'
+import {UserOutlined,LockOutlined} from '@ant-design/icons'
+import API from '../Config/api'
+import axios from 'axios'
+
+function Login(props){                              // props用于编程页面跳转
+
+    const [userName, setUserName] = useState('')
+    const [password, setPassword] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
+
+    const handleLogin = ()=>{    
+        setIsLoading(true)                           // 点击登录按钮后，先启用登录中状态
+        if(!userName){                                  
+            message.error('Please input username.')
+            setIsLoading(false)
+            return false
+        }else if(!password){
+            message.error('Please input password.')
+            setIsLoading(false)
+            return false    
+        }                              // 没有输入报错提示，无需请求数据库
+        
+        let data = {                   // 用于POST传递给后台的数据
+            'userName': userName,      // 从useState中获取数据             
+            'password': password       // Input设置了onChange事件，输入内容改变，赋值状态
+        }
+        console.log(data);
+
+        axios({
+            method: 'post',            // POST请求        
+            url: API.login,
+            data: data,                // 传递上面的POST参数
+            withCredentials: true      // 前后端共享session
+        }).then(res=>{
+            setIsLoading(false)        // 请求数据成功，关闭登录中状态
+            console.log('res: ',res);
+                                       // success由中台服务this.ctx.body={'data':'success','openId':openId}设置
+            if(res.data.data === 'success'){   
+                localStorage.setItem('openId',res.data.openId)
+                props.history.push('/index')
+                message.success('Login Success, Welcome!')
+            }else{
+                message.error('Wrong username and password.')
+            }
+        })
+
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 1000);
+    }
+    
+    return (
+        <div className="login-div">
+            <Spin tip="Loading..." spinning={isLoading}>
+                <Card title="System Login" bordered={true} style={{width:'400px'}} className="card">
+                    <Input className='input-item'
+                        id="username" size="large"
+                        placeholder="password"
+                        prefix={<UserOutlined/>}
+                        onChange={e=>setUserName(e.target.value)}  // 输入变更，同步更新状态
+                    ></Input>
+                    <Input.Password className='input-item'
+                        id="password" size="large"
+                        placeholder="username"
+                        prefix={<LockOutlined/>}
+                        onChange={e=>setPassword(e.target.value)}
+                    ></Input.Password>
+                    <Button className='btn' type="primary" size="large" onClick={handleLogin}>Login</Button>
+                </Card>
+
+            </Spin>
+        </div>
+    )
+}
+
+export default Login
+```
+
+
 
 - cors
 ```
