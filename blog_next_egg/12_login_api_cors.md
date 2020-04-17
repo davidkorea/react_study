@@ -96,6 +96,34 @@ module.exports = app => {
 
 - 由于是POST请求，无法在浏览器直接测试接口
 
+## 1.3 CORS
+```
+Access to XMLHttpRequest at 'http://127.0.0.1:7001/admin/login' from origin 'http://localhost:3000' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'. The credentials mode of requests initiated by the XMLHttpRequest is controlled by the withCredentials attribute.
+```
+
+
+- `config/plugin.js`
+```javascript
+exports.cors = {
+  enable: true,
+  package: 'egg-cors',
+};
+```
+- `config/config.default.js`
+
+```javascript
+config.security = {
+    // scrf: {  注意不要写错！！！
+    csrf: {enable: false},
+    domainWhiteList:['*']
+  };
+  config.cors = {
+    // origin: '*', 除该origin字段，cors插件会设置请求的域名为跨域域名
+    // origin: 'http//localhost:3000',
+    credentials: true,  // 允许cookie跨域
+    allowMethods: 'POST,GET,PUT,HEAD,UPDATE,DELETE,PATCH,OPTIONS'
+  };
+```
 
 
 # 3. Backend
@@ -162,10 +190,10 @@ function Login(props){                              // props用于编程页面�
         }).then(res=>{
             setIsLoading(false)        // 请求数据成功，关闭登录中状态
             console.log('res: ',res);
-                                       // success由中台服务this.ctx.body={'data':'success','openId':openId}设置
+                                       // success由中台设置this.ctx.body={'data':'success','openId':openId}
             if(res.data.data === 'success'){   
                 localStorage.setItem('openId',res.data.openId)
-                props.history.push('/index')
+                props.history.push('/index')       // 登录成功跳转只index页面
                 message.success('Login Success, Welcome!')
             }else{
                 message.error('Wrong username and password.')
@@ -206,11 +234,9 @@ export default Login
 
 
 
-- cors
-```
-Access to XMLHttpRequest at 'http://127.0.0.1:7001/admin/login' from origin 'http://localhost:3000' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'. The credentials mode of requests initiated by the XMLHttpRequest is controlled by the withCredentials attribute.
-```
+## 3.3 CORS
 
+由中台解决
 
 
 
