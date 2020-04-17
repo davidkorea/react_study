@@ -8,7 +8,8 @@
 
 # 1. 获取页面输入信息
 
-title，intro，content，type，date
+1. 获取信息title，intro，content，type，date
+2. 按钮提交信息
 
 ## 1.1 title
 
@@ -106,4 +107,38 @@ const introChange = (e)=>{
 ## 1.4 Type
 
 前面一节，已经设置了鉴权+请求文章类别 [14_backend_blogType](https://github.com/davidkorea/react_study/blob/master/blog_next_egg/14_backend_blogType.md)
+
+
+## 1.5 Save & Publish 提交信息
+
+```javascript
+const handleSave = ()=>{
+    if(!blogTitle){
+        message.warn('No Title')
+        return false
+    }else if(!blogTypeSelected){
+        message.warn('No Type')
+        return false
+    }else if(!addDate){
+        message.warn('No Date')
+        return false
+    }else if(!blogContent){
+        message.warn('No Content')
+        return false
+    }else if(!blogIntro){
+        message.warn('No Intro')
+        return false
+    }
+
+    message.success('ok')        
+}
+
+<Button onClick={handleSave} type="primary" size="large">Save</Button>
+```
+
+
+
+
+
+
 
