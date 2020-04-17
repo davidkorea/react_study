@@ -1,7 +1,7 @@
 # 添加新博客
 
 1. 获取页面全部信息title，intro，content，type，date
-2. 将获取到的信息保存到数据库
+2. 创建中台API，将获取到的信息保存到数据库
 3. 更新文章
 
 
@@ -137,6 +137,84 @@ const handleSave = ()=>{
 ```
 
 <img width="800" src="https://user-images.githubusercontent.com/26485327/79548423-01c93700-80c8-11ea-94ed-ebfe243af76b.png">
+
+
+# 2. Middle API & Database
+
+1. Egg controller
+2. Egg route
+3. Backend global APi config
+4. AddArticle Page logic
+
+
+## 2.1 Middle 
+
+#### Controller
+
+- `app/controller/admin/main.js` 
+
+```javascript
+async AddArticle(){
+    const tempArticle = this.ctx.request.body
+    console.log('tempArticle: ',tempArticle);          //
+
+    const result = await this.app.mysql.insert('blog_article',tempArticle)  // 表名，数据
+    console.log('sqlresult: ',result);                 //
+
+    const insertSuccess = result.affectedRows === 1    // 改变一行表示插入成功
+    const insertId = result.insertId                   // 当前插入条目的id
+
+    console.log('insertSuccess: ',insertSuccess);      //
+    console.log('insertId: ', insertId);               //
+
+    this.ctx.body = {
+        insertSuccess: insertSuccess,
+        insertId: insertId
+    }
+}
+```
+
+- tempArticle
+
+```
+tempArticle:  {
+  article_title: '12345678',
+  article_intro: 'wqefsdcvx ',
+  article_content: 'adsfghjkhgfdsa',
+  article_type_id: 1,
+  add_time: 1586016000,
+  view_count: 0
+}
+```
+- sqlresult
+```
+sqlresult:  OkPacket {
+  fieldCount: 0,
+  affectedRows: 1,
+  insertId: 8,
+  serverStatus: 2,
+  warningCount: 0,
+  message: '',
+  protocol41: true,
+  changedRows: 0
+}
+```
+
+- insertSuccess & insertId
+```
+insertSuccess:  true
+insertId:  8
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
