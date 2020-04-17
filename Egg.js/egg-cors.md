@@ -13,16 +13,18 @@ exports.cors = {
   package: 'egg-cors',
 };
 ```
+
 3. `config/config.default.js`
 ```javascript
 config.security = {
-  scrf: {
+  // scrf: { 写错了！！！！
+  csrf: {
     enable: false
   },
   domainWhiteList:['*']
 };
 config.cors = {
-  origin: '*',
+  origin: '*',   // 注释掉此字段，则可以允许所有域名进行跨域访问！！！！
   allowMethods: 'GET,PUT,HEAD,UPDATE,DELETE,PATCH,OPTIONS'
 };
 ```
