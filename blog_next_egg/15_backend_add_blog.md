@@ -31,6 +31,7 @@ const [addDate, setAddDate] = useState('');
 
 <div className="date-select">
     <DatePicker onChange={(date,dateString)=>{setAddDate(dateString)}} 
+      showTime={true}   // 增加显示时间
       size="large">
     </DatePicker>
 </div>
@@ -50,7 +51,8 @@ Moment {_isAMomentObject: true, _isUTC: false, _pf: {…}, _locale: Locale, _d: 
 
 - datestring
 ```
-2020-04-17
+2020-04-17 18:01:14    
+// 此格式可以直接new Date(2020-04-17 18:01:14).getTime()/1000 转化为unix timestamp
 ```
 
 ## 1.3 Intro & Content
@@ -149,6 +151,24 @@ const handleSave = ()=>{
 
 ## 2.1 Middle 
 
+#### Route
+
+- `app/route/admin.js`
+```diff
+  module.exports = app => {
+    const { router, controller } = app;
+    var adminAuth = app.middleware.adminAuth()
+    router.get('/admin', controller.admin.main.Index);
+    router.post('/admin/login', controller.admin.main.Login);
+    router.get('/admin/getblogtype', adminAuth, controller.admin.main.getBlogType);
++   router.post('/admin/addarticle',adminAuth, controller.admin.main.AddArticle); 
+  };
+```
+
+- POST请求
+- 鉴权adminAuth，未登录，无法请求该url
+
+
 #### Controller
 
 - `app/controller/admin/main.js` 
@@ -208,9 +228,73 @@ insertId:  8
 
 
 
+## 2.2 Backend
 
+### Global API
 
+- `src/Config/api.js`
 
+```diff
+  const baseUrl = 'http://127.0.0.1:7001/admin'
+  const API = {
+      login: baseUrl + '/login',
+      getBlogType: baseUrl + '/getblogtype',
++     AddArticle: baseUrl + '/addarticle'
+  }
+  export default API
+```
+
+### AddArticle页面提交逻辑
+
+```javascript
+const [blogId, setBlogId] = useState(0)  // 创建状态用于保存中台返回的数据insertId
+const handleSave = ()=>{
+    if(!blogTitle){
+        message.warn('No Title')
+        return false
+    }else if(!blogTypeSelected){
+        message.warn('No Type')
+        return false
+    }else if(!addDate){
+        message.warn('No Date')
+        return false
+    }else if(!blogContent){
+        message.warn('No Content')
+        return false
+    }else if(!blogIntro){
+        message.warn('No Intro')
+        return false
+    }
+
+    let tempBlog = {} // 该对象的每个属性对应 数据库中的字段
+    tempBlog.article_title = blogTitle
+    tempBlog.article_intro = blogIntro
+    tempBlog.article_content = blogContent
+    tempBlog.article_type_id = blogTypeSelected
+    // let time = addDate.replace('-','/') // 把-换成/，无需转换，可直接生成时间戳
+    tempBlog.add_time = (new Date(addDate).getTime())/1000
+
+    console.log(tempBlog);
+
+    if(blogId === 0){  // 新增加文章
+        tempBlog.view_count = 0
+        axios({
+            method: 'post',
+            url: API.AddArticle,
+            data: tempBlog, 
+            withCredentials: true
+        }).then(res=>{   // 新增请求成功，会得到insertId
+            console.log(res.data);
+            setBlogId(res.data.insertId)
+            if(res.data.insertSuccess){
+                message.success('Add new blog success')
+            }else{
+                message.error('Add failed')
+            }
+        })
+    }
+}
+```
 
 
 
