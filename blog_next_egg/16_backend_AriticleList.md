@@ -265,6 +265,7 @@ module.exports = app => {
 
 # 4. 页面动态获取数据库信息
 
+上面静态页面的前提下，增加下面请求数据的方法
 
 ```javascript
 import axios from 'axios'
@@ -288,6 +289,7 @@ import API from '../Config/api'
     }
 ```
 
+<img width="1167" src="https://user-images.githubusercontent.com/26485327/79630892-af4f4f80-8187-11ea-8c32-066e2cde86a0.png">
 
 
 
