@@ -62,9 +62,81 @@ function Main(){
 
 
 
+## 1.3 点击菜单按钮，跳转页面
+
+- 只有上面配置好路由，才能正确跳转并显示页面，否则url会变化，但是页面为空白
+  - 因为上面设置路由的作用，就在在页面的某块区域，加载某个组件，不设置，就不知道加载哪个页面，所以空白！！！！！
+
+- 由于使用antd组件，所有菜单按钮单击实现需要按照其文档操作
+  - Menu -> SubMenu -> MenuItem，只有Menu可以绑定onClick事件
+  - 该事件会自动返回一个参数，包含
+    ```
+    {key: "add1", keyPath: Array(1), item: MenuItem, domEvent: Class}
+        domEvent: Class {dispatchConfig: null, _targetInst: null, _dispatchListeners: null, _dispatchInstances: null, …}
+        item: MenuItem {props: {…}, context: {…}, refs: {…}, updater: {…}, onKeyDown: ƒ, …}
+        key: "add1"            // 重要！！！
+        keyPath: ["add1"]
+        __proto__: Object
+    ```
+  - 因为具体的菜单按钮都在MenuItem中，而`key`就是MenuItem中定义的key，用于确认当前点击了哪个菜单按钮
 
 
+```javascript
+const [breadcrumb, setBreadcrumb] = useState('Dashboard');  // 用于变更面包屑导航显示
+const handleMenuClick = e => {
+  console.log(e);
+  if(e.key == 'add1' || e.key == 'add2'){
+    props.history.push('/index/add')
+    setBreadcrumb('Add Article')
+  }else if(e.key == 'list'){
+    props.history.push('/index/list')
+    setBreadcrumb('Article List')
+  }else if(e.key == 'dashboard'){
+    props.history.push('/index/dashboard')
+    setBreadcrumb('Dashboard')
+  }else if(e.key == 'comment'){
+    props.history.push('/index/comment')
+    setBreadcrumb('User Comments')
+  }
+}
+    
+<Menu theme="dark" defaultSelectedKeys={['add1']} mode="inline"
+    onClick={handleMenuClick}
+>
+    <Menu.Item key="dashboard">
+      <PieChartOutlined />
+      <span>Dashboard</span>
+    </Menu.Item>
 
+    <Menu.Item key="add1">
+      <FileAddOutlined />
+      <span>Add Article</span>
+    </Menu.Item>
+
+    <SubMenu
+        key="sub1"
+        title={
+          <span>
+            <OrderedListOutlined />
+            <span>Manage Article</span>
+          </span>
+        }
+    >
+        <Menu.Item key="add2">Add</Menu.Item>
+        <Menu.Item key="list">List</Menu.Item>
+    </SubMenu>
+
+    <Menu.Item key="comment">
+      <CommentOutlined />
+      <span>Comments</span>
+    </Menu.Item>
+</Menu>
+
+<Breadcrumb style={{ margin: '16px 0' }}>
+  <Breadcrumb.Item>Console</Breadcrumb.Item>
+  <Breadcrumb.Item>{ breadcrumb }</Breadcrumb.Item>
+</Breadcrumb>
+```
 
 
 
