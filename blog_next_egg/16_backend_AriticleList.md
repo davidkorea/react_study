@@ -4,6 +4,7 @@
 Backend
 1. 新建页面`src/Pages/AriticleList.js`
 2. AdminIndex添加该页面路由，对应按钮点击事件->页面跳转
+3. AriticleList静态页面
 
 Middle
 1. API
@@ -145,8 +146,7 @@ const handleMenuClick = e => {
 
 
 
-
-
+# 2. AriticleList静态页面
 
 
 
