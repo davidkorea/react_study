@@ -266,7 +266,9 @@ module.exports = app => {
 # 4. 页面动态获取数据库信息
 
 
+```javascript
 
+```
 
 
 
