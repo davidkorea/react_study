@@ -51,7 +51,7 @@ function ArticleList(props){
           title: 'Title',
           dataIndex: 'article_title',
           key: 'article_title',             // key要和数据库中表的字段名一致！！！
-          render: text => <a>{text}</a>,
+          render: text => <a>{text}</a>,    // text变量就是传入的当前值，变量名不重要！！！
         },
         {
           title: 'Date',
@@ -147,6 +147,7 @@ export default ArticleList
 ```
 
 
+<img width="1164" src="https://user-images.githubusercontent.com/26485327/79631160-cabb5a00-8189-11ea-8a21-175a6a536c7a.png">
 
 
 
