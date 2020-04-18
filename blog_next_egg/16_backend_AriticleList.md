@@ -148,14 +148,116 @@ const handleMenuClick = e => {
 
 # 2. AriticleList静态页面
 
+- 使用antd table组件
+
+```javascript
+import { Table, Tag } from 'antd';
+
+function ArticleList(){
+    const columns = [
+        {
+          title: 'Title',
+          dataIndex: 'article_title',
+          key: 'article_title',             // key要和数据库中表的字段名一致！！！
+          render: text => <a>{text}</a>,
+        },
+        {
+          title: 'Date',
+          dataIndex: 'add_time',
+          key: 'add_time',                  // key要和数据库中表的字段名一致！！！
+        },
+        {
+            title: 'View',
+            dataIndex: 'view_count',
+            key: 'view_count',
+          },
+        {
+          title: 'Type',
+          key: 'type_name',
+          dataIndex: 'type_name',
+          render: x => {    // x 就是传递进来的类别名称，不同类别显示颜色不同
+              if(x){
+                let color = x=='Video'?'geekblue' : 'green'
+                return (
+                  <Tag color={color} key={x}> {x} </Tag>
+                );
+              }
+          }
+        },
+        {
+          title: 'Action',      // 这里的数据不是来自数据库，而是在下面render中手动设置
+          key: 'action',
+          render: (record) => { // record就是当前记录本身，包含所有数据库返回字段!!!!!!!
+              return(           // 用于删除时,传递当前文章Id ！！！！！！！！ 
+                <span>
+                <a style={{ marginRight: 16 }}><EditOutlined /> {record.title}</a>
+                <a style={{color:'tomato'}} onClick={()=>deleteArticle(record)} ><DeleteOutlined /></a>
+                </span>
+              );
+            },
+        },
+      ];
+
+    const [blogList, setBlogList] = useState([
+        {
+            id: 7
+            add_time: "2020-04-22 00:00:00"
+            article_title: "Save & Publish 提交信息"
+            type_name: "Video"
+            view_count: 0
+        }
+    ]);
 
 
+    return (
+        <div classtitle="articlelist">
+            <Table pagination={{pageSize:10}} columns={columns} dataSource={blogList} />
+        </div>
+    )
+}
+```
+<img width="1163"  src="https://user-images.githubusercontent.com/26485327/79630635-9c3b8000-8185-11ea-917b-3bb2b2641552.png">
 
 
+# 3. Middle API
 
+### Controller
 
+- `app/controller/admin/main.js`
+```javascript
+async getArticleList(){
+    let sql = "SELECT blog_article.id as id, " +
+          "blog_article.article_title as article_title, " +
+       // "blog_article.article_intro as article_intro, " +
+          "FROM_UNIXTIME(blog_article.add_time, '%Y-%m-%d %H:%i:%s') as add_time, " +
+          "blog_article.view_count as view_count, " +
+          "blog_type.type_name as type_name " +
+          "FROM blog_article LEFT JOIN blog_type ON blog_article.article_type_id = blog_type.type_id " +
+          "ORDER BY blog_article.add_time DESC"   // 按照时间排序后，返回
+          
+    let result = await this.app.mysql.query(sql)
+    this.ctx.body = {data:result};
+}
+```
 
+### Router
 
+```diff
+module.exports = app => {
+  const { router, controller } = app;
+  var adminAuth = app.middleware.adminAuth()
+  router.get('/admin', controller.admin.main.Index);
+  router.post('/admin/login', controller.admin.main.Login);
+  router.get('/admin/getblogtype', adminAuth, controller.admin.main.getBlogType);
+  router.post('/admin/addarticle',adminAuth, controller.admin.main.AddArticle);
+  router.post('/admin/updatearticle',adminAuth, controller.admin.main.updateArticle);
++ router.get('/admin/getarticlelist', adminAuth, controller.admin.main.getArticleList);
+};
+```
+
+### Test API
+
+- `http://127.0.0.1:7001/admin/getarticlelist`
 
 
 
