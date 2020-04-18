@@ -190,8 +190,8 @@ function ArticleList(){
           render: (record) => { // record就是当前记录本身，包含所有数据库返回字段!!!!!!!
               return(           // 用于删除时,传递当前文章Id ！！！！！！！！ 
                 <span>
-                <a style={{ marginRight: 16 }}><EditOutlined /> {record.title}</a>
-                <a style={{color:'tomato'}} onClick={()=>deleteArticle(record)} ><DeleteOutlined /></a>
+                <a style={{ marginRight: 16 }}><EditOutlined /></a>
+                <a style={{ color:'tomato' }}><DeleteOutlined /></a>
                 </span>
               );
             },
