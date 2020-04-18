@@ -82,8 +82,8 @@ function Main(){
 
 
 
-<img width="1202" src="https://user-images.githubusercontent.com/26485327/79627882-b28a1180-816e-11ea-8ebc-ac93a63f1e1b.png">
-<img width="1198" src="https://user-images.githubusercontent.com/26485327/79627881-b027b780-816e-11ea-95ec-c5a8153fcfaf.png">
+<img width="1124" src="https://user-images.githubusercontent.com/26485327/79627934-1ad8f300-816f-11ea-8e75-58eae849dfdd.png">
+<img width="1126" src="https://user-images.githubusercontent.com/26485327/79627938-1ca2b680-816f-11ea-936e-b75beb0e5e44.png">
 
 
 ```javascript
