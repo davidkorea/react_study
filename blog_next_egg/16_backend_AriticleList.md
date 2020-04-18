@@ -82,7 +82,8 @@ function Main(){
 
 
 
-<img width="199" src="https://user-images.githubusercontent.com/26485327/79627801-00eae080-816e-11ea-808e-45f2f30dc9d0.png">
+<img width="1202" src="https://user-images.githubusercontent.com/26485327/79627882-b28a1180-816e-11ea-8ebc-ac93a63f1e1b.png">
+<img width="1198" src="https://user-images.githubusercontent.com/26485327/79627881-b027b780-816e-11ea-95ec-c5a8153fcfaf.png">
 
 
 ```javascript
