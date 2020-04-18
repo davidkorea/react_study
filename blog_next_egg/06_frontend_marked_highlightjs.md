@@ -1,6 +1,6 @@
 # marked + highlight.js
 
-`react-markdown`不是很好用，配置项太少了
+`react-markdown`不是很好用，配置项太少了 [react-markdown](https://github.com/davidkorea/react_study/blob/master/blog_next_egg/react-markdown.md)
 
 # 1. install
 
