@@ -267,7 +267,25 @@ module.exports = app => {
 
 
 ```javascript
+import axios from 'axios'
+import API from '../Config/api'
 
+    const [blogList, setBlogList] = useState([]);
+
+    useEffect(()=>{
+        getArticleList()
+    },[])
+
+    const getArticleList = () => {
+        axios({
+            method: 'get',
+            url: API.getArticleList,
+            withCredentials: true
+        }).then(res=>{
+            // console.log(res.data.data);
+            setBlogList(res.data.data)
+        })
+    }
 ```
 
 
