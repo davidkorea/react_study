@@ -81,6 +81,10 @@ function Main(){
   - 因为具体的菜单按钮都在MenuItem中，而`key`就是MenuItem中定义的key，用于确认当前点击了哪个菜单按钮
 
 
+
+<img width="199" src="https://user-images.githubusercontent.com/26485327/79627801-00eae080-816e-11ea-808e-45f2f30dc9d0.png">
+
+
 ```javascript
 const [breadcrumb, setBreadcrumb] = useState('Dashboard');  // 用于变更面包屑导航显示
 const handleMenuClick = e => {
