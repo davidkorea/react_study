@@ -259,8 +259,11 @@ module.exports = app => {
 
 - `http://127.0.0.1:7001/admin/getarticlelist`
 
+<img width="400" src="https://user-images.githubusercontent.com/26485327/79630718-487d6680-8186-11ea-8351-01ffbf9dbfa7.png">
 
 
+
+# 4. 页面动态获取数据库信息
 
 
 
