@@ -10,7 +10,7 @@
 - 使用`getInitialProps`发起axios请求
 
 ```javascript
-function Home(propsData){     // 从下面getInitialProps获得的数据，无需解包，直接传入使用
+function Home(propsData){     // 从下面getInitialProps获得的return的数据，无需解包，直接传入使用
 
   console.log('propsData: ',propsData);  // show in chrome
   const [blogList, setBlogList] = useState(propsData.data)   // 获得getInitialProps传入的数据
