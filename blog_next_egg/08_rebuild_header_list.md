@@ -112,8 +112,17 @@ async getBlogByTypeId(){
 
 # 2. [Frontend] 菜单导航 + 类别页面
 
-**请求数据的两种方式**
+**请求数据的两种方式** [Next.js getInitialProps VS useEffect #4](https://github.com/davidkorea/react_study/issues/4)
 ##### 1. next.js `getInitialProps`，用于页面加载时，因此对于url变化后进入一个新的页面，请求数据需要使用getInitialProps
+- getInitialProps可以获取前一个页面传递来的路由参数
+```
+Detail.getInitialProps = async(context)=>{
+  let id = context.query.id
+  return {data:'hello'}
+}
+```
+- getInitialProps的return对象可以直接作为props传入页面函数使用
+
 ##### 2. react `useEffect`，用于组件加载时，而页面上局部组件加载时请求数据，使用useEffect
 
 ## 2.1 `Header`组件数据库动态获取菜单类别
